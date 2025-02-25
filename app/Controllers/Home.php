@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Controllers;
+use CodeIgniter\Controller;
+use Config\Database;
 
-class Home extends BaseController
+class Home extends Controller
 {
-    public function index(): string
+    public function index()
     {
-        return view('welcome_message');
+      return view('welcome_message');
     }
 }
+
