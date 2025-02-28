@@ -1,153 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<link rel="icon" type="image/png" href="<?= base_url('assets/images/logo.png'); ?>">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pengelolaan Barang/Jasa</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        h2{
+          color: black;
+        }
+        body {
+            background: linear-gradient(to right, #E6F4FF, #95B4E1, #60A0E9);
+            color: white;
+        }
+        .sidebar {
+            background: linear-gradient(to bottom, #5D56C6, #060334);
+            width: 250px;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .sidebar a:hover, .active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .dashboard-content {
+            padding: 20px;
+            background: white;
+            color: black;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
-<div style="display: flex;">
+
+<div class="d-flex">
     <!-- Sidebar -->
     <div class="sidebar">
-        <div>
-            <img src="<?= base_url('assets/images/image.png') ?>" alt="Profile Icon" class="profile-img">
-            <h2>Admin</h2>
-        </div>
-        
-        <ul class="menu">
-            <li>
-                <a href="<?= base_url('dashboard') ?>">
-                    <i class="icon-home"></i> Dashboard
-                </a>
-            </li>
-            <li class="submenu">
-                <a href="#" class="submenu-toggle">
-                    <i class="icon-document"></i> Kontrak
-                    <span class="submenu-arrow">▼</span>
-                </a>
-                <ul class="submenu-content">
-                    <li><a href="<?= base_url('kontrak/e-katalog') ?>">E-Katalog</a></li>
-                    <li><a href="<?= base_url('kontrak/pl') ?>">PL</a></li>
-                    <li><a href="<?= base_url('kontrak/tender') ?>">Tender</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="<?= base_url('termin') ?>" class="active">
-                    <i class="icon-calendar"></i> <p class="termin">Termin</p>
-                </a>
-            </li>
+        <h3 class="text-center">Admin</h3>
+        <a href="<?= base_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a>
+        <a href="#"><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
+        <ul class="list-unstyled ps-3">
+            <li><a href="#">• E-Katalog</a></li>
+            <li><a href="#">• PL</a></li>
+            <li><a href="#">• Tender</a></li>
         </ul>
-    
-        <div class="branding">
-            <img src="<?= base_url('assets/images/logo_white.png') ?>" alt="Simproka Logo">
-        </div>
-    
-        <a href="<?= base_url('logout') ?>" class="logout">
-            Log out
-        </a>
+        <a href="<?= base_url('termin') ?>" class="active"><i class="fa fa-calendar"></i> Termin</a>
+        <a href="#"><i class="fa fa-sign-out-alt"></i> Log out</a>
     </div>
-    
+
     <!-- Main Content -->
-    <div style="flex-grow: 1; padding: 20px; display: flex; justify-content: center;">
-        <form action="<?= base_url('termin_pembayaran/store') ?>" method="post" style="width: 80%; max-width: 800px; padding: 30px; background: #f8fbff; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);">
-            <h2 style="text-align: center;">Input Termin</h2>
-            
-            <label for="kontrak_id">Nomor Kontrak:</label>
-            <input type="text" name="kontrak_id" id="kontrak_id" required style="width: 100%; padding: 12px; margin-bottom: 15px; font-size: 16px;">
-            
-            <label for="jumlah">Jumlah Pembayaran:</label>
-            <input type="number" name="jumlah" id="jumlah" required style="width: 100%; padding: 12px; margin-bottom: 15px; font-size: 16px;">
-            
-            <label for="tgl_pembayaran">Tanggal Pembayaran:</label>
-            <input type="date" name="tgl_pembayaran" id="tgl_pembayaran" required style="width: 100%; padding: 12px; margin-bottom: 15px; font-size: 16px;">
-            
-            <label for="termin_ke">Termin ke:</label>
-            <input type="number" name="termin_ke" id="termin_ke" required style="width: 100%; padding: 12px; margin-bottom: 15px; font-size: 16px;">
-            
-            <div style="display: flex; justify-content: space-between;">
-                <button type="submit" style="background: #007bff; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Simpan</button>
-                <button type="button" style="background: #dfeaff; color: black; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Selesaikan per termin</button>
-            </div>
-        </form>
+    <div class="container-fluid p-4">
+        <h2>Data Termin</h2>
+
+        <!-- Input Termin -->
+        <div class="dashboard-content mb-4">
+            <h4>Tambah Termin</h4>
+            <form action="<?= base_url('termin_save') ?>" method="post">
+                <div class="mb-3">
+                    <label for="nama_kontrak" class="form-label">Nama Kontrak</label>
+                    <input type="text" class="form-control" id="nama_kontrak" name="nama_kontrak" required>
+                </div>
+                <div class="mb-3">
+                    <label for="nilai" class="form-label">Nilai Termin</label>
+                    <input type="number" class="form-control" id="nilai" name="nilai" required>
+                </div>
+                <div class="mb-3">
+                    <label for="tanggal" class="form-label">Tanggal Termin</label>
+                    <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Simpan</button>
+            </form>
+        </div>
+
+        <!-- List Termin -->
+        <div class="dashboard-content">
+            <h4>Daftar Termin</h4>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Kontrak</th>
+                        <th>Nilai</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no = 1; foreach ($termins as $termin): ?>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= $termin['kontrak_id'] ?></td>
+                            <td>Rp <?= number_format($termin['jumlah'], 0, ',', '.') ?></td>
+                            <td><?= date('d-m-Y', strtotime($termin['tgl_pembayaran'])) ?></td>
+                            <td>
+                                <a href="<?= base_url('termin_edit/' . $termin['id']) ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                <a href="<?= base_url('termin_delete/' . $termin['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Hapus termin ini?')"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </div>
 
-<style>
-    body {
-      background-color: #E6F4FF;
-    }
-    .termin{
-      color: black;
-    }
-    .menu,.submenu,.branding {
-      font-size: large;
-    }
-    .sidebar {
-        width: 378px;
-        height: 100vh;
-        background: #373280;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-    }
-    .profile-section {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .profile-img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: white;
-        padding: 10px;
-    }
-    h2 {
-        font-size: 22px;
-        margin-top: 10px;
-    }
-    .menu {
-        list-style: none;
-        padding: 0;
-        width: 100%;
-    }
-    .menu li {
-        padding: 10px 20px;
-    }
-    .menu a {
-        color: white;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .submenu-content {
-        display: none;
-        list-style: none;
-        padding-left: 20px;
-    }
-    .submenu:hover .submenu-content {
-        display: block;
-    }
-    .active {
-        background: #D7E9FF;
-        color: black;
-        border-radius: 10px;
-    }
-    .branding img {
-        width: 150px;
-        margin-top: 30px;
-    }
-    .logout {
-        margin-top: auto;
-        color: white;
-        text-decoration: none;
-    }
-</style>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>
