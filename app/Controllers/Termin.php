@@ -19,7 +19,8 @@ class Termin extends Controller
         $model->save([
             'kontrak_id' => $this->request->getPost('nama_kontrak'),
             'jumlah' => $this->request->getPost('nilai'),
-            'tgl_pembayaran' => $this->request->getPost('tanggal')
+            'tgl_pembayaran' => $this->request->getPost('tanggal'),
+            'termin_ke' => $this->request->getPost('termin_ke'),
         ]);
         return redirect()->to('termin');
     }

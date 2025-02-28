@@ -77,6 +77,10 @@
                     <label for="tanggal" class="form-label">Tanggal Termin</label>
                     <input type="date" class="form-control" id="tanggal" name="tanggal" required>
                 </div>
+                <div class="mb-3">
+                    <label for="termin_ke" class="form-label">Termin ke</label>
+                    <input type="number" class="form-control" id="termin_ke" name="termin_ke" required>
+                </div>
                 <button type="submit" class="btn btn-primary w-100">Simpan</button>
             </form>
         </div>
@@ -91,6 +95,7 @@
                         <th>Nama Kontrak</th>
                         <th>Nilai</th>
                         <th>Tanggal</th>
+                        <th>Termin ke</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -101,9 +106,22 @@
                             <td><?= $termin['kontrak_id'] ?></td>
                             <td>Rp <?= number_format($termin['jumlah'], 0, ',', '.') ?></td>
                             <td><?= date('d-m-Y', strtotime($termin['tgl_pembayaran'])) ?></td>
+                            <td><?= number_format($termin['termin_ke']) ?></td>
                             <td>
-                                <a href="<?= base_url('termin_edit/' . $termin['id']) ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                <a href="<?= base_url('termin_delete/' . $termin['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Hapus termin ini?')"><i class="fa fa-trash"></i></a>
+                                  <!-- Tombol Edit -->
+                            <form action="<?= base_url('termin/edit/' . $termin['id']) ?>" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-warning btn-sm">
+                                    <i class="fa fa-edit"></i> Edit
+                                </button>
+                            </form>
+
+                            <!-- Tombol Hapus -->
+                            <form action="<?= base_url('termin/delete/' . $termin['id']) ?>" method="post" style="display:inline;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus termin ini?');">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
+                            </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
