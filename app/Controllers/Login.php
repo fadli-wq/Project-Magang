@@ -4,11 +4,11 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use Config\Database;
 
-class Home extends Controller
+class Login extends Controller
 {
     public function index()
     {
-      return view('welcome_message');
+      return view('login/login');
     }
 }
 
