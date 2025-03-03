@@ -8,9 +8,18 @@ class Termin extends Controller
 {
     public function index()
     {
+      return view('termin/index');
+    }
+    public function input()
+    {
         $model = new TerminModel();
         $data['termins'] = $model->findAll();
         return view('termin/input termin', $data);
+    }
+
+    public function data()
+    {
+      return view('termin/data kontrak');
     }
 
     public function save()
@@ -22,13 +31,13 @@ class Termin extends Controller
             'tgl_pembayaran' => $this->request->getPost('tanggal'),
             'termin_ke' => $this->request->getPost('termin_ke'),
         ]);
-        return redirect()->to('termin');
+        return redirect()->to('input_termin');
     }
 
     public function delete($id)
     {
         $model = new TerminModel();
         $model->delete($id);
-        return redirect()->to('/termin');
+        return redirect()->to('input_termin');
     }
 }

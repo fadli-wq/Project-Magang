@@ -122,6 +122,12 @@
                                     <i class="fa fa-trash"></i> Hapus
                                 </button>
                             </form>
+                            <form action="<?= base_url('termin/done' . $termin['id']) ?>" method="post" style="display:inline;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Selesaikan Termin?');">
+                                    <i class="fa fa-check"></i> Selesai
+                                </button>
+                            </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
