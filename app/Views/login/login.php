@@ -30,7 +30,7 @@
 <body>
     <div class="login-container">
         <h3>Login</h3>
-        <form action="dashboard.html" method="POST">
+        <form action="<?= base_url('dashboard') ?>">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required>

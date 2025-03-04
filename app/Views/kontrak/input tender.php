@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termin</title>
+    <title>Tender</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -68,20 +68,20 @@
     <div class="sidebar">
         <h3 class="text-center">Admin</h3>
         <a href="<?= base_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a>
-        <a href="<?= base_url('kontrak')?>"><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
+        <a href="<?= base_url('kontrak')?>" ><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
         <ul class="list-unstyled ps-3">
-            <li><a href="#">• E-Katalog</a></li>
-            <li><a href="#">• PL</a></li>
-            <li><a href="#">• Tender</a></li>
+            <li><a href="<?= base_url('kontrak/e-katalog')?>">• E-Katalog</a></li>
+            <li><a href="<?= base_url('kontrak/pl')?>">• PL</a></li>
+            <li><a href="<?= base_url('kontrak/tender')?>" class="active">• Tender</a></li>
         </ul>
-        <a href="<?= base_url('termin') ?>" class="active"><i class="fa fa-calendar"></i> Termin</a>
+        <a href="<?= base_url('termin') ?>" ><i class="fa fa-calendar"></i> Termin</a>
         <img src="<?= base_url('assets/images/logo_white.png') ?>" alt="Logo">
         <a href="#"><i class="fa fa-sign-out-alt"></i> Log out</a>
     </div>
 
     <!-- Main Content -->
     <div class="container-fluid p-4">
-        <h2>Termin</h2>
+        <h2>Tender</h2>
         <div class="menu-container">
             <div class="menu-card" onclick="location.href='<?= base_url('data_kontrak') ?>';">
                 <h3>Data Kontrak</h3>

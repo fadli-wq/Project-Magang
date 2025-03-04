@@ -50,7 +50,7 @@
     <div class="sidebar">
         <h3 class="text-center">Admin</h3>
         <a href="#" class="active"><i class="fa fa-home"></i> Dashboard</a>
-        <a href="#"><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
+        <a href="<?= base_url('kontrak')?>"><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
         <ul class="list-unstyled ps-3">
             <li><a href="#">• E-Katalog</a></li>
             <li><a href="#">• PL</a></li>

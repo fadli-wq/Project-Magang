@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termin</title>
+    <title>E-Katalog</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -59,6 +59,19 @@
         img{
           width: 150px;
         }
+        .form-control {
+            border-radius: 5px;
+        }
+        .btn-submit {
+            background: #5D56C6;
+            color: white;
+        }
+        .btn-submit:hover {
+            background: #4a47a3;
+        }
+        label{
+          color: black;
+        }
     </style>
 </head>
 <body>
@@ -68,28 +81,51 @@
     <div class="sidebar">
         <h3 class="text-center">Admin</h3>
         <a href="<?= base_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a>
-        <a href="<?= base_url('kontrak')?>"><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
+        <a href="<?= base_url('kontrak')?>" ><i class="fa fa-file-contract" ></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
         <ul class="list-unstyled ps-3">
-            <li><a href="#">• E-Katalog</a></li>
-            <li><a href="#">• PL</a></li>
-            <li><a href="#">• Tender</a></li>
+            <li><a href="<?= base_url('kontrak/e-katalog')?>" class="active">• E-Katalog</a></li>
+            <li><a href="<?= base_url('kontrak/pl')?>">• PL</a></li>
+            <li><a href="<?= base_url('kontrak/tender')?>">• Tender</a></li>
         </ul>
-        <a href="<?= base_url('termin') ?>" class="active"><i class="fa fa-calendar"></i> Termin</a>
+        <a href="<?= base_url('termin') ?>"><i class="fa fa-calendar"></i> Termin</a>
         <img src="<?= base_url('assets/images/logo_white.png') ?>" alt="Logo">
         <a href="#"><i class="fa fa-sign-out-alt"></i> Log out</a>
     </div>
 
     <!-- Main Content -->
     <div class="container-fluid p-4">
-        <h2>Termin</h2>
-        <div class="menu-container">
-            <div class="menu-card" onclick="location.href='<?= base_url('data_kontrak') ?>';">
-                <h3>Data Kontrak</h3>
+    <h2 class="text-center">Input E-Katalog</h2>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" class="form-control" placeholder="Masukkan Nama">
             </div>
-            <div class="menu-card" onclick="location.href='<?= base_url('input_termin') ?>';">
-                <h3>Input Termin</h3>
+            <div class="mb-3">
+                <label class="form-label">Nomor Kontrak</label>
+                <input type="text" class="form-control" placeholder="Masukkan Nomor Kontrak">
             </div>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Tanggal SP</label>
+                <input type="date" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tanggal Delivery</label>
+                <input type="date" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Lama Pekerjaan (Hari)</label>
+                <input type="number" class="form-control" placeholder="Masukkan Lama Pekerjaan">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nilai Kontrak</label>
+                <input type="number" class="form-control" placeholder="Masukkan Nilai Kontrak">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Terbilang</label>
+                <input type="text" class="form-control" placeholder="Masukkan Nilai Terbilang">
+            </div>
+            <button type="submit" class="btn btn-submit w-100">Simpan</button>
+        </form>
     </div>
 </div>
 
