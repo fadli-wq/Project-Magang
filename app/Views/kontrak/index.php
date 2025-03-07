@@ -103,16 +103,19 @@
                 <h4>E-Katalog</h4>
                 <p>Sistem ini berisi daftar produk dan jasa yang telah terverifikasi dan tersedia untuk dibeli langsung tanpa melalui proses tender yang panjang.</p>
                 <button class="btn btn-custom"><a href="<?= base_url('kontrak/e-katalog')?>" style="color: inherit; text-decoration: none;">INPUT</a></button>
+                <button class="btn btn-primary"><a href="<?= base_url('kontrak/e-katalog/lihat kontrak')?>" style="color: inherit; text-decoration: none;">Lihat Kontrak</a></button>
             </div>
             <div class="card-custom">
                 <h4>Pengadaan Langsung (PL)</h4>
                 <p>Metode pengadaan barang/jasa yang dilakukan secara langsung kepada penyedia tanpa melalui proses tender atau lelang.</p>
                 <button class="btn btn-custom"><a href="<?= base_url('kontrak/pl')?>" style="color: inherit; text-decoration: none;">INPUT</a></button>
+                <button class="btn btn-primary"><a href="<?= base_url('kontrak/pl/lihat kontrak')?>" style="color: inherit; text-decoration: none;">Lihat Kontrak</a></button>
             </div>
             <div class="card-custom">
                 <h4>Tender</h4>
                 <p>Proses pelelangan atau seleksi yang dilakukan oleh pemerintah atau perusahaan untuk mendapatkan penyedia barang atau jasa dengan penawaran terbaik.</p>
                 <button class="btn btn-custom"><a href="<?= base_url('kontrak/tender')?>" style="color: inherit; text-decoration: none;">INPUT</a></button>
+                <button class="btn btn-primary"><a href="<?= base_url('kontrak/tender/lihat kontrak')?>" style="color: inherit; text-decoration: none;">Lihat kontrak</a></button>
             </div>
         </div>
     </div>
