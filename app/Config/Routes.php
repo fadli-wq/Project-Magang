@@ -7,7 +7,9 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Homepage::index');
 $routes->get('/login', 'Login::index');
-$routes->get('/dashboard', 'Dashboard::index');
+$routes->post('/login/authenticate', 'Login::authenticate');
+$routes->get('/dashboard', 'Dashboard::index', ['filter' => 'auth']);
+$routes->get('/logout', 'Login::logout');
 $routes->get('/termin', 'Termin::index');
 $routes->get('/input_termin', 'Termin::input');
 $routes->get('/data_kontrak', 'Termin::data');
