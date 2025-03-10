@@ -8,5 +8,5 @@ class E_katalogPembayaranModel extends Model
 {
     protected $table            = 'pembayaran';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = ['pagu', 'metode', 'jumlah_termin', 'sumber dana'];
+    protected $allowedFields    = ['id_kontrak','pagu', 'metode', 'jumlah_termin', 'sumber_dana'];
 }

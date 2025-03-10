@@ -103,7 +103,7 @@
                 <h4>E-Katalog</h4>
                 <p>Sistem ini berisi daftar produk dan jasa yang telah terverifikasi dan tersedia untuk dibeli langsung tanpa melalui proses tender yang panjang.</p>
                 <button class="btn btn-custom"><a href="<?= base_url('kontrak/e-katalog')?>" style="color: inherit; text-decoration: none;">INPUT</a></button>
-                <button class="btn btn-primary"><a href="<?= base_url('kontrak/e-katalog/lihat kontrak')?>" style="color: inherit; text-decoration: none;">Lihat Kontrak</a></button>
+                <button class="btn btn-primary"><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/')?>" style="color: inherit; text-decoration: none;">Lihat Kontrak</a></button>
             </div>
             <div class="card-custom">
                 <h4>Pengadaan Langsung (PL)</h4>

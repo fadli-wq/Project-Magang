@@ -83,7 +83,7 @@
                 
                 <div class="mb-3">
                     <label class="form-label">Pagu</label>
-                    <input type="text" name="pagu" class="form-control" placeholder="Masukkan Pagu" value="<?= session()->get('pembayaran.pagu') ?? '' ?>" required>
+                    <input type="number" name="pagu" class="form-control" placeholder="Masukkan Pagu" value="<?= session()->get('pembayaran.pagu') ?? '' ?>" required>
                 </div>
 
                 <div class="mb-3">
@@ -96,7 +96,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Jumlah Termin</label>
-                    <input type="number" name="jumlah_termin" class="form-control" placeholder="Masukkan Jumlah Termin" value="<?= session()->get('pembayaran.jumlah_termin') ?? '' ?>" required>
+                    <input type="number" name="jumlah_termin" class="form-control" placeholder="Masukkan Jumlah Termin" value="<?= session()->get('pembayaran.jumlah_termin') ?? '1' ?>" required>
                 </div>
 
                 <div class="mb-3">
@@ -114,4 +114,25 @@
 </div>
 
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const metodePembayaran = document.querySelector("select[name='metode']");
+        const jumlahTermin = document.querySelector("input[name='jumlah_termin']");
+
+        function updateTermin() {
+            if (metodePembayaran.value === "Sekaligus") {
+                jumlahTermin.value = 1;
+                jumlahTermin.setAttribute("readonly", true);
+            } else {
+                jumlahTermin.removeAttribute("readonly");
+            }
+        }
+
+        // Jalankan saat halaman pertama kali dimuat
+        updateTermin();
+
+        // Jalankan saat metode pembayaran berubah
+        metodePembayaran.addEventListener("change", updateTermin);
+    });
+</script>
 </html>

@@ -78,7 +78,7 @@
     <div class="container-fluid p-4">
         <h2 class="text-center">Input Item E-Katalog</h2>
         <div class="form-container">
-        <form action="<?= base_url('kontrak/e-katalog/pembayaran/termin/item/submit') ?>" method="post">
+        <form action="<?= base_url('kontrak/e-katalog/pembayaran/termin/item_submit') ?>" method="post">
           <?= csrf_field() ?>
           <label>Kode Paket</label>
           <input type="text" name="kode_paket" class="form-control" value="<?= session()->get('item.kode_paket') ?? '' ?>" required>
