@@ -49,9 +49,45 @@ class Kontrak extends BaseController
         'kontrakSPP' => $kontrakSPP
     ]);
     }
+
+    public function detail($id)
+    {
+        $eKatalogModel = new E_katalogModel();
+        $pembayaranModel = new E_katalogPembayaranModel();
+        $itemModel = new LainlainModel();
+
+        // Ambil data kontrak berdasarkan ID
+        $kontrak = $eKatalogModel->find($id);
+
+        // Jika tidak ditemukan, redirect dengan pesan error
+        if (!$kontrak) {
+            return redirect()->to(base_url('kontrak/e-katalog'))->with('error', 'Kontrak tidak ditemukan.');
+        }
+
+        // Ambil data pembayaran dan item terkait
+        $pembayaran = $pembayaranModel->where('id_kontrak', $id)->first();
+        $items = $itemModel->where('id_kontrak', $id)->findAll();
+
+        $data = [
+            'kontrak' => $kontrak,
+            'pembayaran' => $pembayaran,
+            'items' => $items
+        ];
+
+        return view('kontrak/detail kontrak', $data);
+    }
+
     public function pembayaran()
     {
         $session = session();
+
+        $nomor_kontrak = $this->request->getPost('nomor_sp') ?: 
+                      $this->request->getPost('nomor_spmk') ?: 
+                      $this->request->getPost('nomor_spp');
+
+        $tgl_kontrak = $this->request->getPost('tgl_sp') ?: 
+                   $this->request->getPost('tgl_spmk') ?: 
+                   $this->request->getPost('tgl_spp');
 
         $session->set('e_katalog', [
             'nama' => $this->request->getPost('nama'),
@@ -64,7 +100,9 @@ class Kontrak extends BaseController
             'tgl_delivery' => $this->request->getPost('tgl_delivery'),
             'lama_pekerjaan' => $this->request->getPost('lama_pekerjaan'),
             'nilai_kontrak' => $this->request->getPost('nilai_kontrak'),
-            'terbilang' => $this->request->getPost('terbilang')
+            'terbilang' => $this->request->getPost('terbilang'),
+            'nomor_kontrak'   => $nomor_kontrak,
+            'tgl_kontrak'     => $tgl_kontrak
         ]);
 
         return redirect()->to(base_url('kontrak/e-katalog/pembayaran'));
