@@ -15,17 +15,13 @@ class Login extends Controller
         $session = session();
         $userModel = new LoginModel();
 
-        // Ambil data dari form
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        // Cek apakah user ada di database
         $user = $userModel->getUserByUsername($username);
 
         if ($user) {
-            // Verifikasi password (pastikan password di-hash saat disimpan)
             if ($password === $user['password']) {
-                // Set session jika login berhasil
                 $session->set([
                     'isLoggedIn' => true,
                     'username' => $user['username'],
@@ -47,4 +43,3 @@ class Login extends Controller
         return redirect()->to(base_url('login'))->with('success', 'Berhasil Logout!');
     }
 }
-

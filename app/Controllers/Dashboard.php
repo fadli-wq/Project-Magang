@@ -11,7 +11,6 @@ class Dashboard extends BaseController
     {
       $session = session();
 
-        // Cek apakah user sudah login
         if (!$session->get('isLoggedIn')) {
             return redirect()->to(base_url('login'))->with('error', 'Silakan login terlebih dahulu!');
         }
