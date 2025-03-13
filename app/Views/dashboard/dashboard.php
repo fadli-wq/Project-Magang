@@ -87,8 +87,13 @@
         <!-- Vendor & Kontrak -->
         <div class="row">
             <div class="col-md-6">
-                <div class="dashboard-content text-center">
-                    <h5>Vendor</h5>
+                <div class="dashboard-content ">
+                    <h5 class="text-center">Vendor</h5>
+                    <ul class="list-group">
+                      <?php foreach ($vendors as $vendor) : ?>
+                          <li class="list-group-item"><?= $vendor['penyedia'] ?></li>
+                      <?php endforeach; ?>
+                    </ul>
                 </div>
             </div>
             <div class="col-md-6">

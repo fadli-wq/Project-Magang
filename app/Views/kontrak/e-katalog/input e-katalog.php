@@ -103,55 +103,43 @@
                     <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan Nama" value="<?= session()->get('e_katalog.nama') ?? '' ?>" required>
                 </div>                
                 <div class="row">
-                <div class="col-md-4">
-                  <input type="radio" name="kontrakOption" value="SP" onclick="enableFields('sp')" 
-                        <?= session()->get('e_katalog.nomor_sp') ? 'checked' : '' ?>>
-                  <label class="form-label">Nomor Kontrak SP</label>
-                  <input type="text" name="nomor_sp" id="spInput" class="form-control" placeholder="Masukkan Nomor SP"
-                        value="<?= session()->get('e_katalog.nomor_sp') ?? '' ?>"
-                        <?= session()->get('e_katalog.nomor_sp') ? '' : 'disabled' ?>>
-              </div>
+    <div class="col-md-4">
+        <label class="form-label">Nomor Kontrak SP</label>
+        <input type="text" name="nomor_sp" id="spInput" class="form-control"
+            placeholder="Masukkan Nomor SP" value="<?= session()->get('e_katalog.nomor_sp') ?? '' ?>">
+    </div>
 
-              <div class="col-md-4">
-                  <input type="radio" name="kontrakOption" value="SPMK" onclick="enableFields('spmk')" 
-                        <?= session()->get('e_katalog.nomor_spmk') ? 'checked' : '' ?>>
-                  <label class="form-label">SPMK</label>
-                  <input type="text" name="nomor_spmk" id="spmkInput" class="form-control" placeholder="Masukkan SPMK"
-                        value="<?= session()->get('e_katalog.nomor_spmk') ?? '' ?>"
-                        <?= session()->get('e_katalog.nomor_spmk') ? '' : 'disabled' ?>>
-              </div>
+    <div class="col-md-4">
+        <label class="form-label">Nomor SPMK</label>
+        <input type="text" name="nomor_spmk" id="spmkInput" class="form-control"
+            placeholder="Masukkan SPMK" value="<?= session()->get('e_katalog.nomor_spmk') ?? '' ?>">
+    </div>
 
-              <div class="col-md-4">
-                  <input type="radio" name="kontrakOption" value="SPP" onclick="enableFields('spp')" 
-                        <?= session()->get('e_katalog.nomor_spp') ? 'checked' : '' ?>>
-                  <label class="form-label">SPP</label>
-                  <input type="text" name="nomor_spp" id="sppInput" class="form-control" placeholder="Masukkan SPP"
-                        value="<?= session()->get('e_katalog.nomor_spp') ?? '' ?>"
-                        <?= session()->get('e_katalog.nomor_spp') ? '' : 'disabled' ?>>
-              </div>
+    <div class="col-md-4">
+        <label class="form-label">Nomor SPP</label>
+        <input type="text" name="nomor_spp" id="sppInput" class="form-control"
+            placeholder="Masukkan SPP" value="<?= session()->get('e_katalog.nomor_spp') ?? '' ?>">
+    </div>
+</div>
 
-            </div>
+<div class="row mt-3">
+    <div class="col-md-4">
+        <label class="form-label">Tanggal SP</label>
+        <input type="date" name="tgl_sp" id="tglSp" class="form-control"
+            value="<?= session()->get('e_katalog.tgl_sp') ?? '' ?>">
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Tanggal SPMK</label>
+        <input type="date" name="tgl_spmk" id="tglSpmk" class="form-control"
+            value="<?= session()->get('e_katalog.tgl_spmk') ?? '' ?>">
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Tanggal SPP</label>
+        <input type="date" name="tgl_spp" id="tglSpp" class="form-control"
+            value="<?= session()->get('e_katalog.tgl_spp') ?? '' ?>">
+    </div>
+</div>
 
-            <div class="row mt-3">
-            <div class="col-md-4">
-                <label class="form-label">Tanggal SP</label>
-                <input type="date" name="tgl_sp" id="tglSp" class="form-control" 
-                      value="<?= session()->get('e_katalog.tgl_sp') ?? '' ?>"
-                      <?= session()->get('e_katalog.tgl_sp') ? '' : 'disabled' ?>>
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Tanggal SPMK</label>
-                <input type="date" name="tgl_spmk" id="tglSpmk" class="form-control" 
-                      value="<?= session()->get('e_katalog.tgl_spmk') ?? '' ?>"
-                      <?= session()->get('e_katalog.tgl_spmk') ? '' : 'disabled' ?>>
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Tanggal SPP</label>
-                <input type="date" name="tgl_spp" id="tglSpp" class="form-control" 
-                      value="<?= session()->get('e_katalog.tgl_spp') ?? '' ?>"
-                      <?= session()->get('e_katalog.tgl_spp') ? '' : 'disabled' ?>>
-            </div>
-            </div>
                 </div>    
                 <div class="mb-3">
                     <label class="form-label">Tanggal Delivery</label>
@@ -175,41 +163,16 @@
     </div>
 </div>
 <script>
-  function enableFields(selected) {
-    const kontrakFields = ["sp", "spmk", "spp"];
-    const tanggalFields = ["tglSp", "tglSpmk", "tglSpp"];
-
-    // Aktifkan input kontrak yang dipilih, kosongkan yang lain
-    kontrakFields.forEach(id => {
-        const inputField = document.getElementById(id + "Input");
-
-        if (id === selected) {
-            inputField.removeAttribute("disabled");
-        } else {
-            inputField.setAttribute("disabled", "true");
-            inputField.value = ""; // Kosongkan isinya
-        }
-    });
-
-    // Aktifkan tanggal yang sesuai dengan pilihan kontrak, kosongkan yang lain
-    tanggalFields.forEach(id => {
-        let relatedRadio = id.replace("tgl", "").toLowerCase();
-        const dateInput = document.getElementById(id);
-
-        if (relatedRadio === selected) {
-            dateInput.removeAttribute("disabled");
-        } else {
-            dateInput.setAttribute("disabled", "true");
-            dateInput.value = "";
-        }
-    });
-}
 window.onload = function () {
-        const selectedOption = "<?= session()->get('e_katalog.nomor_sp') ? 'sp' : (session()->get('e_katalog.nomor_spmk') ? 'spmk' : (session()->get('e_katalog.nomor_spp') ? 'spp' : '')) ?>";
-        if (selectedOption) {
-            enableFields(selectedOption);
-        }
-    };
+    document.getElementById("spInput").value = "<?= session()->get('e_katalog.nomor_sp') ?? '' ?>";
+    document.getElementById("spmkInput").value = "<?= session()->get('e_katalog.nomor_spmk') ?? '' ?>";
+    document.getElementById("sppInput").value = "<?= session()->get('e_katalog.nomor_spp') ?? '' ?>";
+    
+    document.getElementById("tglSp").value = "<?= session()->get('e_katalog.tgl_sp') ?? '' ?>";
+    document.getElementById("tglSpmk").value = "<?= session()->get('e_katalog.tgl_spmk') ?? '' ?>";
+    document.getElementById("tglSpp").value = "<?= session()->get('e_katalog.tgl_spp') ?? '' ?>";
+};
 </script>
+
 </body>
 </html>

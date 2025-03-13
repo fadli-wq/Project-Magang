@@ -109,7 +109,11 @@
                     <td><?= $kontrak['pembayaran']['jumlah_termin'] ?? '-'; ?></td>
                     <td><?= $kontrak['pembayaran']['sumber_dana'] ?? '-'; ?></td>
                     <td><?= count($kontrak['items']); ?></td>
-                    <td><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a></td>
+                    <td><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
+                    <a href="<?= base_url('kontrak/e-katalog/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
+                          <i class="fa fa-download"></i> Unduh SP
+                      </a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -148,7 +152,11 @@
                     <td><?= $kontrak['pembayaran']['jumlah_termin'] ?? '-'; ?></td>
                     <td><?= $kontrak['pembayaran']['sumber_dana'] ?? '-'; ?></td>
                     <td><?= count($kontrak['items']); ?></td>
-                    <td><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a></td>
+                    <td><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
+                    <a href="<?= base_url('kontrak/e-katalog/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
+                          <i class="fa fa-download"></i> Unduh SPMK
+                      </a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -187,7 +195,11 @@
                     <td><?= $kontrak['pembayaran']['jumlah_termin'] ?? '-'; ?></td>
                     <td><?= $kontrak['pembayaran']['sumber_dana'] ?? '-'; ?></td>
                     <td><?= count($kontrak['items']); ?></td>
-                    <td><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a></td>
+                    <td><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
+                      <a href="<?= base_url('kontrak/e-katalog/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
+                          <i class="fa fa-download"></i> Unduh SPP
+                      </a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

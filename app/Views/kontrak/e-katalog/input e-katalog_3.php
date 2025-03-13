@@ -90,8 +90,11 @@
           <input type="number" name="kuantitas" class="form-control" value="<?= session()->get('item.kuantitas') ?? '' ?>" required>
           <label>Harga Satuan</label>
           <input type="number" name="harga_satuan" class="form-control" value="<?= session()->get('item.harga_satuan') ?? '' ?>" required>
-          <label>Penyedia</label>
-          <input type="text" name="penyedia" class="form-control" value="<?= session()->get('item.penyedia') ?? '' ?>" required>
+          <label class="form-label">Penyedia</label>
+                    <select name="penyedia" class="form-control" required>
+                        <option value="Raihan" <?= (session()->get('item.penyedia') == 'Raihan') ? 'selected' : '' ?>>Raihan</option>
+                        <option value="Rohan" <?= (session()->get('item.penyedia') == 'Rohan') ? 'selected' : '' ?>>Rohan</option>
+                    </select>
           <div class="d-flex justify-content-between">
               <a href="<?= base_url('kontrak/e-katalog/pembayaran') ?>" class="btn btn-secondary mt-3">Back</a>
               <button type="submit" class="btn btn-submit mt-3 btn-md">Simpan</button>

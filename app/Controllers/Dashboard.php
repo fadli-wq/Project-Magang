@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\LainlainModel;
 
 class Dashboard extends BaseController
 {
@@ -15,6 +16,13 @@ class Dashboard extends BaseController
             return redirect()->to(base_url('login'))->with('error', 'Silakan login terlebih dahulu!');
         }
 
-        return view('dashboard/dashboard');
+        $lainlainModel = new LainlainModel();
+
+        $vendors = $lainlainModel->select('penyedia')->distinct()->findAll();
+
+        $data = [
+            'vendors' => $vendors
+        ];
+        return view('dashboard/dashboard', $data);
     }
 }

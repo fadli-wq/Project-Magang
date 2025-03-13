@@ -128,10 +128,8 @@
             }
         }
 
-        // Jalankan saat halaman pertama kali dimuat
         updateTermin();
 
-        // Jalankan saat metode pembayaran berubah
         metodePembayaran.addEventListener("change", updateTermin);
     });
 </script>
