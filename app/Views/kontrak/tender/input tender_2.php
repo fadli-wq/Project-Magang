@@ -65,9 +65,9 @@
         <a href="<?= base_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a>
         <a href="<?= base_url('kontrak') ?>" ><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
         <ul class="list-unstyled ps-3">
-            <li><a href="<?= base_url('kontrak/e-katalog') ?>" class="active">• E-Katalog</a></li>
+            <li><a href="<?= base_url('kontrak/e-katalog') ?>">• E-Katalog</a></li>
             <li><a href="<?= base_url('kontrak/pl') ?>">• PL</a></li>
-            <li><a href="<?= base_url('kontrak/tender') ?>">• Tender</a></li>
+            <li><a href="<?= base_url('kontrak/tender') ?>" class="active">• Tender</a></li>
         </ul>
         <a href="<?= base_url('termin') ?>"><i class="fa fa-calendar"></i> Termin</a>
         <img src="<?= base_url('assets/images/logo_white.png') ?>" alt="Logo">
@@ -76,36 +76,36 @@
 
     <!-- Main Content -->
     <div class="container-fluid p-4">
-        <h2 class="text-center">Input Pembayaran E-Katalog</h2>
+        <h2 class="text-center">Input Pembayaran Tender</h2>
         <div class="form-container">
-            <form action="<?= base_url('kontrak/e-katalog/pembayaran/termin_simpan_session') ?>" method="post">
+            <form action="<?= base_url('kontrak/tender/pembayaran/termin_simpan_session') ?>" method="post">
                 <?= csrf_field() ?>
                 
                 <div class="mb-3">
                     <label class="form-label">Pagu</label>
-                    <input type="number" name="pagu" class="form-control" placeholder="Masukkan Pagu" value="<?= session()->get('e-katalog_pembayaran.pagu') ?? '' ?>" required>
+                    <input type="number" name="pagu" class="form-control" placeholder="Masukkan Pagu" value="<?= session()->get('tender_pembayaran.pagu') ?? '' ?>" required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Metode Pembayaran</label>
                     <select name="metode" class="form-control" required>
-                        <option value="Sekaligus" <?= (session()->get('e-katalog_pembayaran.metode') == 'Sekaligus') ? 'selected' : '' ?>>Sekaligus</option>
-                        <option value="Termin" <?= (session()->get('e-katalog_pembayaran.metode') == 'Termin') ? 'selected' : '' ?>>Termin</option>
+                        <option value="Sekaligus" <?= (session()->get('tender_pembayaran.metode') == 'Sekaligus') ? 'selected' : '' ?>>Sekaligus</option>
+                        <option value="Termin" <?= (session()->get('tender_pembayaran.metode') == 'Termin') ? 'selected' : '' ?>>Termin</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Jumlah Termin</label>
-                    <input type="number" name="jumlah_termin" class="form-control" placeholder="Masukkan Jumlah Termin" value="<?= session()->get('e-katalog_pembayaran.jumlah_termin') ?? '1' ?>" required>
+                    <input type="number" name="jumlah_termin" class="form-control" placeholder="Masukkan Jumlah Termin" value="<?= session()->get('tender_pembayaran.jumlah_termin') ?? '1' ?>" required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Sumber Dana</label>
-                    <input type="text" name="sumber_dana" class="form-control" placeholder="Masukkan Sumber Dana" value="<?= session()->get('e-katalog_pembayaran.sumber_dana') ?? '' ?>" required>
+                    <input type="text" name="sumber_dana" class="form-control" placeholder="Masukkan Sumber Dana" value="<?= session()->get('tender_pembayaran.sumber_dana') ?? '' ?>" required>
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <a href="<?= base_url('kontrak/e-katalog') ?>" class="btn btn-secondary mt-3">Back</a>
+                    <a href="<?= base_url('kontrak/tender') ?>" class="btn btn-secondary mt-3">Back</a>
                     <button type="submit" class="btn btn-submit mt-3">Next</button>
                 </div>
             </form>

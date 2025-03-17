@@ -123,7 +123,7 @@ class Kontrak extends BaseController
     {
         $session = session();
 
-        $session->set('pembayaran', [
+        $session->set('e-katalog_pembayaran', [
             'pagu' => $this->request->getPost('pagu'),
             'metode' => $this->request->getPost('metode'),
             'jumlah_termin' => $this->request->getPost('jumlah_termin'),
@@ -139,22 +139,10 @@ class Kontrak extends BaseController
         $session = session();
         $data = [
             'e_katalog' => $session->get('e_katalog'), 
-            'pembayaran' => $session->get('pembayaran'), 
-            'item' => $session->get('item')
+            'e-katalog_pembayaran' => $session->get('e-katalog_pembayaran'), 
+            'e-katalog_item' => $session->get('e-katalog_item')
           ];
         return view('kontrak/e-katalog/input e-katalog_3',$data);
-    }
-    public function review()
-    {
-        $session = session();
-
-        $data = [
-            'e_katalog' => $session->get('e_katalog'),
-            'pembayaran' => $session->get('pembayaran'),
-            'item' => $session->get('item'),
-        ];
-
-        return view('kontrak/e-katalog/review', $data);
     }
 
     public function e_katalog_item_submit()
@@ -166,7 +154,7 @@ class Kontrak extends BaseController
         $itemModel = new LainlainModel();
 
         $e_katalog = $session->get('e_katalog');
-        $pembayaran = $session->get('pembayaran');
+        $pembayaran = $session->get('e-katalog_pembayaran');
 
         if (!$e_katalog || !$pembayaran) {
             return redirect()->to(base_url('kontrak/e-katalog'))->with('error', 'Data session tidak ditemukan.');
@@ -217,8 +205,13 @@ class Kontrak extends BaseController
     $pembayaran = $pembayaranModel->where('id_kontrak', $id)->first();
     $items = $itemModel->where('id_kontrak', $id)->findAll();
 
+    $firstItem = $itemModel->where('id_kontrak', $id)->first();
+    $nama_penyedia = $firstItem['penyedia'] ?? '-';
+
+    $nama_penyedia = $firstItem['penyedia'] ?? '-';
+
     $direktur = $direkturModel->first();
-    
+
     if (!$e_katalog) {
         return redirect()->to(base_url('kontrak/e-katalog'))->with('error', 'Kontrak tidak ditemukan.');
     }
@@ -243,6 +236,7 @@ class Kontrak extends BaseController
     $templateProcessor->setValue('nama_direktur', $nama_direktur);
     $templateProcessor->setValue('jabatan_direktur', $jabatan_direktur);
     $templateProcessor->setValue('alamat_penyedia', $alamat_penyedia);
+    $templateProcessor->setValue('nama_penyedia', $nama_penyedia);
 
     // 🔹 Clone Row untuk item
     if (!empty($items)) {
