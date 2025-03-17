@@ -41,6 +41,9 @@ $routes->get('/kontrak/tender/pembayaran', 'Tender::tender_termin');
 $routes->post('/kontrak/tender/pembayaran/termin_simpan_session', 'Tender::tender_termin_submit');
 $routes->get('/kontrak/tender/pembayaran/termin', 'Tender::tender_item');
 $routes->post('/kontrak/tender/pembayaran/termin/item_submit', 'Tender::tender_item_submit');
+$routes->get('/kontrak/tender/success', 'Kontrak::success');
+$routes->get('/kontrak/tender/daftar_kontrak_tender', 'Tender::daftar_kontrak_tender');
+$routes->get('/kontrak/tender/daftar_kontrak_tender/(:num)', 'Tender::detail/$1');
 
 $routes->get('/export-word', 'WordExport::generate');
 
