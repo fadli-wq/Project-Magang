@@ -4,9 +4,11 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use PhpOffice\PhpWord\TemplateProcessor;
 use App\Models\E_katalogModel;
 use App\Models\LainlainModel;
 use App\Models\E_katalogPembayaranModel;
+use App\Models\DIrekturModel;
 
 class Kontrak extends BaseController
 {
@@ -121,7 +123,7 @@ class Kontrak extends BaseController
     {
         $session = session();
 
-        $session->set('pembayaran', [
+        $session->set('e-katalog_pembayaran', [
             'pagu' => $this->request->getPost('pagu'),
             'metode' => $this->request->getPost('metode'),
             'jumlah_termin' => $this->request->getPost('jumlah_termin'),
@@ -137,22 +139,10 @@ class Kontrak extends BaseController
         $session = session();
         $data = [
             'e_katalog' => $session->get('e_katalog'), 
-            'pembayaran' => $session->get('pembayaran'), 
-            'item' => $session->get('item')
+            'e-katalog_pembayaran' => $session->get('e-katalog_pembayaran'), 
+            'e-katalog_item' => $session->get('e-katalog_item')
           ];
         return view('kontrak/e-katalog/input e-katalog_3',$data);
-    }
-    public function review()
-    {
-        $session = session();
-
-        $data = [
-            'e_katalog' => $session->get('e_katalog'),
-            'pembayaran' => $session->get('pembayaran'),
-            'item' => $session->get('item'),
-        ];
-
-        return view('kontrak/e-katalog/review', $data);
     }
 
     public function e_katalog_item_submit()
@@ -164,7 +154,7 @@ class Kontrak extends BaseController
         $itemModel = new LainlainModel();
 
         $e_katalog = $session->get('e_katalog');
-        $pembayaran = $session->get('pembayaran');
+        $pembayaran = $session->get('e-katalog_pembayaran');
 
         if (!$e_katalog || !$pembayaran) {
             return redirect()->to(base_url('kontrak/e-katalog'))->with('error', 'Data session tidak ditemukan.');
@@ -202,6 +192,71 @@ class Kontrak extends BaseController
         $session->remove(['e_katalog', 'pembayaran']);
 
         return redirect()->to(base_url('kontrak/e-katalog/success'))->with('success', 'Data berhasil disimpan.');
+    }
+
+    public function generateSP($id)
+    {
+    $eKatalogModel = new E_katalogModel();
+    $pembayaranModel = new E_katalogPembayaranModel();
+    $itemModel = new LainlainModel();
+    $direkturModel = new DirekturModel();
+
+    $e_katalog = $eKatalogModel->find($id);
+    $pembayaran = $pembayaranModel->where('id_kontrak', $id)->first();
+    $items = $itemModel->where('id_kontrak', $id)->findAll();
+
+    $firstItem = $itemModel->where('id_kontrak', $id)->first();
+    $nama_penyedia = $firstItem['penyedia'] ?? '-';
+
+    $nama_penyedia = $firstItem['penyedia'] ?? '-';
+
+    $direktur = $direkturModel->first();
+
+    if (!$e_katalog) {
+        return redirect()->to(base_url('kontrak/e-katalog'))->with('error', 'Kontrak tidak ditemukan.');
+    }
+
+    $nama_direktur = $direktur['nama_direktur'] ?? '-';
+    $jabatan_direktur = $direktur['jabatan_direktur'] ?? '-';
+    $alamat_penyedia = $direktur['alamat_penyedia'] ?? '-';
+
+    $templatePath = WRITEPATH . 'uploads/Salinan sp.docx';
+    $savePath = WRITEPATH . 'generated/SP_' . $e_katalog['id'] . '.docx';
+
+    $templateProcessor = new TemplateProcessor($templatePath);
+
+    // 🔹 Set nilai utama
+    $templateProcessor->setValue('kode_paket', $items[0]['kode_paket'] ?? '-');
+    $templateProcessor->setValue('no_sp', $e_katalog['nomor_kontrak'] ?? '-');
+    $templateProcessor->setValue('tgl_sp', $e_katalog['tgl_kontrak'] ?? '-');
+    $templateProcessor->setValue('nama_pengadaan', $e_katalog['nama']);
+    $templateProcessor->setValue('tgl_pengiriman', $e_katalog['tgl_delivery'] ?? '-');
+    $templateProcessor->setValue('total', number_format($e_katalog['nilai_kontrak'], 0, ',', '.'));
+    $templateProcessor->setValue('terbilang', $e_katalog['terbilang'] ?? '-');
+    $templateProcessor->setValue('nama_direktur', $nama_direktur);
+    $templateProcessor->setValue('jabatan_direktur', $jabatan_direktur);
+    $templateProcessor->setValue('alamat_penyedia', $alamat_penyedia);
+    $templateProcessor->setValue('nama_penyedia', $nama_penyedia);
+
+    // 🔹 Clone Row untuk item
+    if (!empty($items)) {
+        $templateProcessor->cloneRow('tabelx', count($items));
+
+        foreach ($items as $index => $item) {
+            $row = $index + 1;
+            $templateProcessor->setValue("kode_item#$row", $item['kode_item'] ?? '-');
+            $templateProcessor->setValue("nama_item#$row", $item['nama_item'] ?? '-');
+            $templateProcessor->setValue("kuantitas#$row", number_format($item['kuantitas'], 2, ',', '.'));
+            $templateProcessor->setValue("satuan#$row", number_format($item['harga_satuan'], 0, ',', '.'));
+            $templateProcessor->setValue("harga_kirim#$row", number_format($item['harga_kirim'] ?? 0, 0, ',', '.'));
+            $templateProcessor->setValue("tgl_pengiriman#$row", $item['tgl_pengiriman'] ?? '-');
+            $templateProcessor->setValue("total#$row", number_format($item['kuantitas'] * $item['harga_satuan'], 0, ',', '.'));
+        }
+    }
+
+    // 🔹 Simpan dan download
+    $templateProcessor->saveAs($savePath);
+    return $this->response->download($savePath, null)->setFileName('Surat_Pesanan_' . $e_katalog['id'] . '.docx');
     }
 
 

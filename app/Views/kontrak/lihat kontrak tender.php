@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Kontrak E-Katalog</title>
+    <title>Daftar Kontrak Tender</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -66,27 +66,27 @@
           <a href="<?= base_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a>
           <a href="<?= base_url('kontrak')?>" ><i class="fa fa-file-contract" ></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
           <ul class="list-unstyled ps-3">
-              <li><a href="<?= base_url('kontrak/e-katalog')?>" class="active">• E-Katalog</a></li>
+              <li><a href="<?= base_url('kontrak/e-katalog')?>">• E-Katalog</a></li>
               <li><a href="<?= base_url('kontrak/pl')?>">• PL</a></li>
-              <li><a href="<?= base_url('kontrak/tender')?>">• Tender</a></li>
+              <li><a href="<?= base_url('kontrak/tender')?>" class="active">• Tender</a></li>
           </ul>
           <a href="<?= base_url('termin') ?>"><i class="fa fa-calendar"></i> Termin</a>
           <img src="<?= base_url('assets/images/logo_white.png') ?>" alt="Logo">
           <a href="#"><i class="fa fa-sign-out-alt"></i> Log out</a>
       </div>
 <div class="container-fluid p-4">
-    <h2 class="text-center">Daftar Kontrak E-Katalog</h2>
+    <h2 class="text-center">Daftar Kontrak Tender</h2>
 
-    <!-- TABEL SP -->
+    <!-- TABEL Perjanjian -->
     <div class="card-custom mt-4">
-        <h4>Kontrak SP</h4>
+        <h4>Kontrak Perjanjian</h4>
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nama</th>
-                    <th>Nomor SP</th>
-                    <th>Tanggal SP</th>
+                    <th>Nomor Surat Perjanjian</th>
+                    <th>Tanggal Perjanjian</th>
                     <th>Nilai Kontrak</th>
                     <th>Pagu</th>
                     <th>Metode</th>
@@ -97,21 +97,21 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($kontrakSP as $kontrak) : ?>
+                <?php foreach ($kontrakPerjanjian as $kontrak) : ?>
                 <tr>
                     <td><?= $kontrak['id']; ?></td>
                     <td><?= $kontrak['nama']; ?></td>
-                    <td><?= $kontrak['nomor_sp']; ?></td>
-                    <td><?= $kontrak['tgl_sp']; ?></td>
+                    <td><?= $kontrak['nomor_perjanjian']; ?></td>
+                    <td><?= $kontrak['tgl_perjanjian']; ?></td>
                     <td>Rp <?= number_format($kontrak['nilai_kontrak'], 0, ',', '.'); ?></td>
                     <td>Rp <?= number_format($kontrak['pembayaran']['pagu'] ?? 0, 0, ',', '.'); ?></td>
                     <td><?= $kontrak['pembayaran']['metode'] ?? '-'; ?></td>
                     <td><?= $kontrak['pembayaran']['jumlah_termin'] ?? '-'; ?></td>
                     <td><?= $kontrak['pembayaran']['sumber_dana'] ?? '-'; ?></td>
                     <td><?= count($kontrak['items']); ?></td>
-                    <td><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
-                    <a href="<?= base_url('kontrak/e-katalog/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
-                          <i class="fa fa-download"></i> Unduh SP
+                    <td><a href="<?= base_url('kontrak/tender/daftar_kontrak_tender/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
+                    <a href="<?= base_url('kontrak/tender/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
+                          <i class="fa fa-download"></i> Unduh Perjanjian
                       </a>
                     </td>
                 </tr>
@@ -152,52 +152,9 @@
                     <td><?= $kontrak['pembayaran']['jumlah_termin'] ?? '-'; ?></td>
                     <td><?= $kontrak['pembayaran']['sumber_dana'] ?? '-'; ?></td>
                     <td><?= count($kontrak['items']); ?></td>
-                    <td><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
-                    <a href="<?= base_url('kontrak/e-katalog/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
+                    <td><a href="<?= base_url('kontrak/tender/daftar_kontrak_tender/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
+                    <a href="<?= base_url('kontrak/tender/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
                           <i class="fa fa-download"></i> Unduh SPMK
-                      </a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- TABEL SPP -->
-    <div class="card-custom mt-4">
-        <h4>Kontrak SPP</h4>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Nomor SPP</th>
-                    <th>Tanggal SPP</th>
-                    <th>Nilai Kontrak</th>
-                    <th>Pagu</th>
-                    <th>Metode</th>
-                    <th>Jumlah Termin</th>
-                    <th>Sumber Dana</th>
-                    <th>Jumlah Item</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($kontrakSPP as $kontrak) : ?>
-                <tr>
-                    <td><?= $kontrak['id']; ?></td>
-                    <td><?= $kontrak['nama']; ?></td>
-                    <td><?= $kontrak['nomor_spp']; ?></td>
-                    <td><?= $kontrak['tgl_spp']; ?></td>
-                    <td>Rp <?= number_format($kontrak['nilai_kontrak'], 0, ',', '.'); ?></td>
-                    <td>Rp <?= number_format($kontrak['pembayaran']['pagu'] ?? 0, 0, ',', '.'); ?></td>
-                    <td><?= $kontrak['pembayaran']['metode'] ?? '-'; ?></td>
-                    <td><?= $kontrak['pembayaran']['jumlah_termin'] ?? '-'; ?></td>
-                    <td><?= $kontrak['pembayaran']['sumber_dana'] ?? '-'; ?></td>
-                    <td><?= count($kontrak['items']); ?></td>
-                    <td><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
-                      <a href="<?= base_url('kontrak/e-katalog/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
-                          <i class="fa fa-download"></i> Unduh SPP
                       </a>
                     </td>
                 </tr>

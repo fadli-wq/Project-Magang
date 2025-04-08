@@ -61,51 +61,86 @@
         <a href="<?= base_url('logout') ?>"><i class="fa fa-sign-out-alt"></i> Log out</a>
     </div>
 
-    <!-- Main Content -->
-    <div class="container-fluid p-4">
-        <h2>Welcome Admin!</h2>
+<!-- Main Content -->
+<div class="container-fluid p-4">
+    <h2 class="mb-4"><i class="fa fa-chart-bar"></i> Dashboard</h2>
 
-        <!-- Overview -->
-        <div class="dashboard-content mb-4">
-            <h4>Over View</h4>
-            <div class="row">
-                <div class="col-md-3">
-                    <button class="btn btn-outline-dark w-100">E-Katalog</button>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-outline-dark w-100">PL</button>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-outline-dark w-100">Tender</button>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-outline-dark w-100">Termin</button>
+    <!-- Overview -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary shadow">
+                <div class="card-body text-center">
+                    <i class="fa fa-book fa-2x"></i>
+                    <h5 class="card-title mt-2">E-Katalog</h5>
+                    <h3 class="fw-bold"><?= count($e_katalog) ?></h3>
                 </div>
             </div>
         </div>
-
-        <!-- Vendor & Kontrak -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="dashboard-content text-center">
-                    <h5>Vendor</h5>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="dashboard-content text-center">
-                    <button class="btn btn-outline-dark">Jumlah Kontrak Berjalanan</button>
-                    <button class="btn btn-outline-dark">Jumlah Kontrak Selesai</button>
+        <div class="col-md-3">
+            <div class="card text-white bg-success shadow">
+                <div class="card-body text-center">
+                    <i class="fa fa-shopping-cart fa-2x"></i>
+                    <h5 class="card-title mt-2">PL</h5>
+                    <h3 class="fw-bold"></h3>
                 </div>
             </div>
         </div>
-
-        <!-- Rekap -->
-        <div class="dashboard-content mt-4">
-            <h4>Rekap</h4>
-            <button class="btn btn-outline-dark">Tahunan</button>
-            <button class="btn btn-outline-dark">2025</button>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning shadow">
+                <div class="card-body text-center">
+                    <i class="fa fa-file-contract fa-2x"></i>
+                    <h5 class="card-title mt-2">Tender</h5>
+                    <h3 class="fw-bold"><?= count($tender) ?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger shadow">
+                <div class="card-body text-center">
+                    <i class="fa fa-calendar-alt fa-2x"></i>
+                    <h5 class="card-title mt-2">Termin</h5>
+                    <h3 class="fw-bold"></h3>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Vendor & Kontrak -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa fa-building"></i> Vendor</h5>
+                    <ul class="list-group list-group-flush">
+                        <?php foreach ($vendors as $vendor) : ?>
+                            <li class="list-group-item"><?= $vendor['penyedia'] ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title"><i class="fa fa-tasks"></i> Kontrak Status</h5>
+                    <button class="btn btn-outline-dark me-2">Kontrak Berjalan</button>
+                    <button class="btn btn-outline-dark">Kontrak Selesai</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rekap -->
+    <div class="card shadow mt-4">
+        <div class="card-body text-center">
+            <h5 class="card-title"><i class="fa fa-chart-pie"></i> Rekap</h5>
+            <button class="btn btn-dark me-2">Tahunan</button>
+            <button class="btn btn-primary">2025</button>
+        </div>
+    </div>
+</div>
+
+
 </div>
 
 </body>

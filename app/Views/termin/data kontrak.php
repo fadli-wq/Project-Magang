@@ -12,7 +12,7 @@
         }
         body {
             background: linear-gradient(to right, #E6F4FF, #95B4E1, #60A0E9);
-            color: white;
+            color: black;
         }
         .sidebar {
             background: linear-gradient(to bottom, #5D56C6, #060334);
@@ -40,7 +40,7 @@
 <div class="d-flex">
     <!-- Sidebar -->
     <div class="sidebar">
-        <h3 class="text-center">Admin</h3>
+        <h3 class="text-center" style="color: white;">Admin</h3>
         <a href="<?= base_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a>
         <a href="<?= base_url('kontrak')?>"><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
         <ul class="list-unstyled ps-3">
@@ -52,5 +52,39 @@
         <img src="<?= base_url('assets/images/logo_white.png') ?>" alt="Logo">
         <a href="#"><i class="fa fa-sign-out-alt"></i> Log out</a>
     </div>
+    <div class="container-fluid p-4">
+      <h2 class="text-center">Input Termin</h2>
+      <div class="dashboard-content mb-4">
+          <form action="<?= base_url('termin/simpan') ?>" method="post">
+              <?= csrf_field() ?>
+
+              <div class="mb-3">
+                  <label class="form-label">Nomor Kontrak</label>
+                  <select name="nomor_kontrak" class="form-control" required>
+                      <option value="">Pilih Kontrak</option>
+                      <?php foreach ($kontrak as $k) : ?>
+                          <option value="<?= $k['nomor_kontrak']; ?>"><?= $k['nomor_kontrak']; ?></option>
+                      <?php endforeach; ?>
+                  </select>
+              </div>
+
+              <div class="mb-3">
+                  <label class="form-label">Tanggal Termin</label>
+                  <input type="date" name="tgl_termin" class="form-control" required>
+              </div>
+
+              <div class="mb-3">
+                  <label class="form-label">Termin Ke</label>
+                  <input type="number" name="jumlah_termin" class="form-control" required>
+              </div>
+
+              <div class="mb-3">
+                  <label class="form-label">Nilai Termin</label>
+                  <input type="number" name="nilai_termin" class="form-control" required>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100">Simpan</button>
+          </form>
+      </div>
 </body>
 </html>
