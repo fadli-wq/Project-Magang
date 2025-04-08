@@ -26,7 +26,7 @@ $routes->get('/kontrak/e-katalog/pembayaran/termin', 'Kontrak::e_katalog_item');
 $routes->post('/kontrak/e-katalog/pembayaran/termin/item_submit', 'Kontrak::e_katalog_item_submit');
 $routes->get('/kontrak/e-katalog/pembayaran/termin/item/review', 'Kontrak::review');
 $routes->get('/kontrak/e-katalog/success', 'Kontrak::success');
-$routes->get('/kontrak/pl', 'Kontrak::pl');
+$routes->get('/kontrak/pl', 'KontrakPL::index');
 $routes->get('/kontrak/tender', 'Kontrak::tender');
 $routes->get('/export-word', 'WordExport::generate');
 
