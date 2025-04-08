@@ -4,9 +4,11 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use PhpOffice\PhpWord\TemplateProcessor;
 use App\Models\TenderModel;
 use App\Models\TenderPembayaranModel;
 use App\Models\TenderLainlainModel;
+use App\Models\DirekturModel;
 
 class Tender extends BaseController
 {
@@ -180,5 +182,70 @@ class Tender extends BaseController
         ];
 
         return view('kontrak/detail tender', $data);
+    }
+
+    public function generateSP($id)
+    {
+    $TenderModel = new TenderModel();
+    $pembayaranModel = new TenderPembayaranModel();
+    $itemModel = new TenderLainlainModel();
+    $direkturModel = new DirekturModel();
+
+    $tender = $TenderModel->find($id);
+    $pembayaran = $pembayaranModel->where('id_kontrak', $id)->first();
+    $items = $itemModel->where('id_kontrak', $id)->findAll();
+
+    $firstItem = $itemModel->where('id_kontrak', $id)->first();
+    $nama_penyedia = $firstItem['penyedia'] ?? '-';
+
+    $nama_penyedia = $firstItem['penyedia'] ?? '-';
+
+    $direktur = $direkturModel->first();
+
+    if (!$tender) {
+        return redirect()->to(base_url('kontrak/tender'))->with('error', 'Kontrak tidak ditemukan.');
+    }
+
+    $nama_direktur = $direktur['nama_direktur'] ?? '-';
+    $jabatan_direktur = $direktur['jabatan_direktur'] ?? '-';
+    $alamat_penyedia = $direktur['alamat_penyedia'] ?? '-';
+
+    $templatePath = WRITEPATH . 'uploads/Salinan sp.docx';
+    $savePath = WRITEPATH . 'generated/SP_' . $tender['id'] . '.docx';
+
+    $templateProcessor = new TemplateProcessor($templatePath);
+
+    // 🔹 Set nilai utama
+    $templateProcessor->setValue('kode_paket', $items[0]['kode_paket'] ?? '-');
+    $templateProcessor->setValue('no_sp', $tender['nomor_kontrak'] ?? '-');
+    $templateProcessor->setValue('tgl_sp', $tender['tgl_kontrak'] ?? '-');
+    $templateProcessor->setValue('nama_pengadaan', $tender['nama']);
+    $templateProcessor->setValue('tgl_pengiriman', $tender['tgl_delivery'] ?? '-');
+    $templateProcessor->setValue('total', number_format($tender['nilai_kontrak'], 0, ',', '.'));
+    $templateProcessor->setValue('terbilang', $tender['terbilang'] ?? '-');
+    $templateProcessor->setValue('nama_direktur', $nama_direktur);
+    $templateProcessor->setValue('jabatan_direktur', $jabatan_direktur);
+    $templateProcessor->setValue('alamat_penyedia', $alamat_penyedia);
+    $templateProcessor->setValue('nama_penyedia', $nama_penyedia);
+
+    // 🔹 Clone Row untuk item
+    if (!empty($items)) {
+        $templateProcessor->cloneRow('tabelx', count($items));
+
+        foreach ($items as $index => $item) {
+            $row = $index + 1;
+            $templateProcessor->setValue("kode_item#$row", $item['kode_item'] ?? '-');
+            $templateProcessor->setValue("nama_item#$row", $item['nama_item'] ?? '-');
+            $templateProcessor->setValue("kuantitas#$row", number_format($item['kuantitas'], 2, ',', '.'));
+            $templateProcessor->setValue("satuan#$row", number_format($item['harga_satuan'], 0, ',', '.'));
+            $templateProcessor->setValue("harga_kirim#$row", number_format($item['harga_kirim'] ?? 0, 0, ',', '.'));
+            $templateProcessor->setValue("tgl_pengiriman#$row", $item['tgl_pengiriman'] ?? '-');
+            $templateProcessor->setValue("total#$row", number_format($item['kuantitas'] * $item['harga_satuan'], 0, ',', '.'));
+        }
+    }
+
+    // 🔹 Simpan dan download
+    $templateProcessor->saveAs($savePath);
+    return $this->response->download($savePath, null)->setFileName('Surat_Pesanan_' . $tender['id'] . '.docx');
     }
 }

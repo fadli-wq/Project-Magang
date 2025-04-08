@@ -111,7 +111,7 @@
                     <td><?= count($kontrak['items']); ?></td>
                     <td><a href="<?= base_url('kontrak/tender/daftar_kontrak_tender/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
                     <a href="<?= base_url('kontrak/tender/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
-                          <i class="fa fa-download"></i> Unduh SP
+                          <i class="fa fa-download"></i> Unduh Perjanjian
                       </a>
                     </td>
                 </tr>
