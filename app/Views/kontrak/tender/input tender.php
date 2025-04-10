@@ -89,7 +89,7 @@
         </ul>
         <a href="<?= base_url('termin') ?>"><i class="fa fa-calendar"></i> Termin</a>
         <img src="<?= base_url('assets/images/logo_white.png') ?>" alt="Logo">
-        <a href="#"><i class="fa fa-sign-out-alt"></i> Log out</a>
+        <a href="<?= base_url('logout') ?>"><i class="fa fa-sign-out-alt"></i> Log out</a>
     </div>
 
     <!-- Main Content -->

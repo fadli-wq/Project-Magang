@@ -144,7 +144,7 @@ class Tender extends BaseController
         $kontrak['pembayaran'] = $pembayaranModel->where('id_kontrak', $kontrak['id'])->first();
         $kontrak['items'] = $itemModel->where('id_kontrak', $kontrak['id'])->findAll();
 
-        if (!empty($kontrak['nomor_sp'])) {
+        if (!empty($kontrak['nomor_perjanjian'])) {
             $kontrakPerjanjian[] = $kontrak;
         } elseif (!empty($kontrak['nomor_spmk'])) {
             $kontrakSPMK[] = $kontrak;
