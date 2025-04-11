@@ -7,5 +7,5 @@ class TerminModel extends Model
 {
     protected $table = 'termin_pembayaran';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['kontrak_id', 'jumlah', 'tgl_pembayaran', 'termin_ke'];
+    protected $allowedFields = ['kontrak_id', 'tgl_termin', 'termin_ke', 'nilai_termin'];
 }

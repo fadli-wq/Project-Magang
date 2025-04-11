@@ -59,15 +59,25 @@
               <?= csrf_field() ?>
 
               <div class="mb-3">
-                  <label class="form-label">Nomor Kontrak</label>
-                  <select name="nomor_kontrak" class="form-control" required>
-                      <option value="">Pilih Kontrak</option>
-                      <?php foreach ($kontrak as $k) : ?>
-                          <option value="<?= $k['nomor_kontrak']; ?>"><?= $k['nomor_kontrak']; ?></option>
-                      <?php endforeach; ?>
-                  </select>
-              </div>
-
+        <label class="form-label">Pilih Kontrak</label>
+        <select name="kontrak_id" class="form-control" required>
+            <option value="">-- Pilih Kontrak --</option>
+            <optgroup label="E-Katalog">
+                <?php foreach ($kontrak_ekatalog as $k) : ?>
+                    <option value="<?= $k['id']; ?>">
+                        <?= $k['nomor_kontrak'] ?? 'Tanpa Nomor' ?> - <?= $k['nama']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </optgroup>
+            <optgroup label="Tender">
+                <?php foreach ($kontrak_tender as $t) : ?>
+                    <option value="<?= $t['id']; ?>">
+                        <?= $t['nomor_kontrak'] ?? 'Tanpa Nomor' ?> - <?= $t['nama']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </optgroup>
+        </select>
+    </div>
               <div class="mb-3">
                   <label class="form-label">Tanggal Termin</label>
                   <input type="date" name="tgl_termin" class="form-control" required>
@@ -75,7 +85,7 @@
 
               <div class="mb-3">
                   <label class="form-label">Termin Ke</label>
-                  <input type="number" name="jumlah_termin" class="form-control" required>
+                  <input type="number" name="termin_ke" class="form-control" required>
               </div>
 
               <div class="mb-3">
@@ -84,6 +94,13 @@
               </div>
 
               <button type="submit" class="btn btn-primary w-100">Simpan</button>
+              <?php if (session()->getFlashdata('success')) : ?>
+                  <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+              <?php endif; ?>
+              <?php if (session()->getFlashdata('error')) : ?>
+                  <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+              <?php endif; ?>
+
           </form>
       </div>
 </body>
