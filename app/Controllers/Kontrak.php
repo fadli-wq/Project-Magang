@@ -220,7 +220,7 @@ class Kontrak extends BaseController
     $jabatan_direktur = $direktur['jabatan_direktur'] ?? '-';
     $alamat_penyedia = $direktur['alamat_penyedia'] ?? '-';
 
-    $templatePath = WRITEPATH . 'uploads/Salinan sp.docx';
+    $templatePath = WRITEPATH . 'uploads/sp.docx';
     $savePath = WRITEPATH . 'generated/SP_' . $e_katalog['id'] . '.docx';
 
     $templateProcessor = new TemplateProcessor($templatePath);
