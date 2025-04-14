@@ -260,6 +260,137 @@ class Kontrak extends BaseController
     }
 
 
+    public function generateSPMK($id)
+    {
+    $eKatalogModel = new E_katalogModel();
+    $pembayaranModel = new E_katalogPembayaranModel();
+    $itemModel = new LainlainModel();
+    $direkturModel = new DirekturModel();
+
+    $e_katalog = $eKatalogModel->find($id);
+    $pembayaran = $pembayaranModel->where('id_kontrak', $id)->first();
+    $items = $itemModel->where('id_kontrak', $id)->findAll();
+
+    $firstItem = $itemModel->where('id_kontrak', $id)->first();
+    $nama_penyedia = $firstItem['penyedia'] ?? '-';
+
+    $nama_penyedia = $firstItem['penyedia'] ?? '-';
+
+    $direktur = $direkturModel->first();
+
+    $lama = $e_katalog['lama_pekerjaan'] ?? 0;
+    $lama_hari = $this->convertHariToWords($lama);
+    $hasil_pekerjaan = 'Terpenuhinya kebutuhan ' . strtolower($e_katalog['nama']);
+
+    if (!$e_katalog) {
+        return redirect()->to(base_url('kontrak/e-katalog'))->with('error', 'Kontrak tidak ditemukan.');
+    }
+
+    $nama_direktur = $direktur['nama_direktur'] ?? '-';
+    $jabatan_direktur = $direktur['jabatan_direktur'] ?? '-';
+    $alamat_penyedia = $direktur['alamat_penyedia'] ?? '-';
+
+    $templatePath = WRITEPATH . 'uploads/spmk.docx';
+    $savePath = WRITEPATH . 'generated/SPMK_' . $e_katalog['id'] . '.docx';
+
+    $templateProcessor = new TemplateProcessor($templatePath);
+
+    // 🔹 Set nilai utama
+    $templateProcessor->setValue('no_sp', $e_katalog['no_sp'] ?? '-');
+    $templateProcessor->setValue('no_spmk', $e_katalog['nomor_spmk'] ?? '-');
+    $templateProcessor->setValue('tgl_sp', $e_katalog['tgl_sp'] ?? '-');
+    $templateProcessor->setValue('nama_pengadaan', $e_katalog['nama']);
+    $templateProcessor->setValue('tgl_pengiriman', $e_katalog['tgl_delivery'] ?? '-');
+    $templateProcessor->setValue('total', number_format($e_katalog['nilai_kontrak'], 0, ',', '.'));
+    $templateProcessor->setValue('terbilang', $e_katalog['terbilang'] ?? '-');
+    $templateProcessor->setValue('nama_direktur', $nama_direktur);
+    $templateProcessor->setValue('jabatan_direktur', $jabatan_direktur);
+    $templateProcessor->setValue('alamat_penyedia', $alamat_penyedia);
+    $templateProcessor->setValue('nama_penyedia', $nama_penyedia);
+    $templateProcessor->setValue('lama', $lama);
+    $templateProcessor->setValue('lama_hari', $lama_hari);
+    $templateProcessor->setValue('hasil_pekerjaan', $hasil_pekerjaan);
+
+    // 🔹 Simpan dan download
+    $templateProcessor->saveAs($savePath);
+    return $this->response->download($savePath, null)->setFileName('Surat_Pesanan_' . $e_katalog['id'] . '.docx');
+    }
+
+    private function convertHariToWords($number)
+    {
+    $f = new \NumberFormatter("id", \NumberFormatter::SPELLOUT);
+    return ucfirst($f->format($number));
+    }
+
+    public function generateSPP($id)
+    {
+    $eKatalogModel = new E_katalogModel();
+    $pembayaranModel = new E_katalogPembayaranModel();
+    $itemModel = new LainlainModel();
+    $direkturModel = new DirekturModel();
+
+    $e_katalog = $eKatalogModel->find($id);
+    $pembayaran = $pembayaranModel->where('id_kontrak', $id)->first();
+    $items = $itemModel->where('id_kontrak', $id)->findAll();
+
+    $firstItem = $itemModel->where('id_kontrak', $id)->first();
+    $nama_penyedia = $firstItem['penyedia'] ?? '-';
+
+    $nama_penyedia = $firstItem['penyedia'] ?? '-';
+
+    $direktur = $direkturModel->first();
+    
+    $lama = $e_katalog['lama_pekerjaan'] ?? 0;
+    $lama_hari = $this->convertHariToWords($lama);
+    $hasil_pekerjaan = 'Terpenuhinya kebutuhan ' . strtolower($e_katalog['nama']);
+
+    if (!$e_katalog) {
+        return redirect()->to(base_url('kontrak/e-katalog'))->with('error', 'Kontrak tidak ditemukan.');
+    }
+
+    $nama_direktur = $direktur['nama_direktur'] ?? '-';
+    $jabatan_direktur = $direktur['jabatan_direktur'] ?? '-';
+    $alamat_penyedia = $direktur['alamat_penyedia'] ?? '-';
+
+    $templatePath = WRITEPATH . 'uploads/spp.docx';
+    $savePath = WRITEPATH . 'generated/SPP_' . $e_katalog['id'] . '.docx';
+
+    $templateProcessor = new TemplateProcessor($templatePath);
+
+    // 🔹 Set nilai utama
+    $templateProcessor->setValue('kode_paket', $items[0]['kode_paket'] ?? '-');
+    $templateProcessor->setValue('no_spp', $e_katalog['nomor_spp'] ?? '-');
+    $templateProcessor->setValue('no_sp', $e_katalog['nomor_sp'] ?? '-');
+    $templateProcessor->setValue('tgl_sp', $e_katalog['tgl_kontrak'] ?? '-');
+    $templateProcessor->setValue('nama_pengadaan', $e_katalog['nama']);
+    $templateProcessor->setValue('tgl_pengiriman', $e_katalog['tgl_delivery'] ?? '-');
+    $templateProcessor->setValue('total', number_format($e_katalog['nilai_kontrak'], 0, ',', '.'));
+    $templateProcessor->setValue('terbilang', $e_katalog['terbilang'] ?? '-');
+    $templateProcessor->setValue('nama_direktur', $nama_direktur);
+    $templateProcessor->setValue('jabatan_direktur', $jabatan_direktur);
+    $templateProcessor->setValue('alamat_penyedia', $alamat_penyedia);
+    $templateProcessor->setValue('nama_penyedia', $nama_penyedia);
+    $templateProcessor->setValue('lama', $lama);
+    $templateProcessor->setValue('lama_hari', $lama_hari);
+    $templateProcessor->setValue('hasil_pekerjaan', $hasil_pekerjaan);
+
+    // 🔹 Clone Row untuk item
+    if (!empty($items)) {
+        $templateProcessor->cloneRow('tabel', count($items));
+
+        foreach ($items as $index => $item) {
+            $row = $index + 1;
+            $templateProcessor->setValue("kode_item#$row", $item['kode_item'] ?? '-');
+            $templateProcessor->setValue("nama_item#$row", $item['nama_item'] ?? '-');
+            $templateProcessor->setValue("kuantitas#$row", number_format($item['kuantitas'], 2, ',', '.'));
+        }
+    }
+
+    // 🔹 Simpan dan download
+    $templateProcessor->saveAs($savePath);
+    return $this->response->download($savePath, null)->setFileName('Surat_Pesanan_' . $e_katalog['id'] . '.docx');
+    }
+
     public function success()
     {
         return view('kontrak/e-katalog/success');

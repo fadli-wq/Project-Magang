@@ -79,18 +79,42 @@
         <a href="<?= base_url('logout') ?>"><i class="fa fa-sign-out-alt"></i> Log out</a>
     </div>
 
-    <!-- Main Content -->
-    <div class="container-fluid p-4">
-        <h2>Termin</h2>
-        <div class="menu-container">
-            <div class="menu-card" onclick="location.href='<?= base_url('data_kontrak') ?>';">
-                <h3>Data Kontrak</h3>
-            </div>
-            <div class="menu-card" onclick="location.href='<?= base_url('input_termin') ?>';">
-                <h3>Input Termin</h3>
-            </div>
+    <!-- Main Content - Light Mode -->
+<div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 100vh; background: #f8f9fa;">
+  <div class="dashboard-content p-4 rounded shadow w-100" style="max-width: 1000px; background: white;">
+    <h2 class="mb-5 text-center text-dark"><i class="fa fa-calendar-alt me-2"></i>Manajemen Termin</h2>
+
+    <div class="row justify-content-center text-center g-4">
+      <!-- Data Kontrak -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-4" style="cursor: pointer;" onclick="location.href='<?= base_url('data_kontrak') ?>';">
+          <i class="fa fa-file-alt fa-2x text-primary mb-3"></i>
+          <h5 class="fw-bold">Data Kontrak</h5>
+          <p class="text-muted mb-0">Lihat dan kelola seluruh data kontrak.</p>
         </div>
+      </div>
+
+      <!-- Daftar Termin -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-4" style="cursor: pointer;" onclick="location.href='<?= base_url('input_termin') ?>';">
+          <i class="fa fa-tasks fa-2x text-success mb-3"></i>
+          <h5 class="fw-bold">Daftar Termin</h5>
+          <p class="text-muted mb-0">Input dan atur termin pembayaran.</p>
+        </div>
+      </div>
+
+      <!-- Laporan Termin -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-4" style="cursor: pointer;" onclick="location.href='<?= base_url('laporan_termin') ?>';">
+          <i class="fa fa-chart-bar fa-2x text-warning mb-3"></i>
+          <h5 class="fw-bold">Laporan Termin</h5>
+          <p class="text-muted mb-0">Rekap dan visualisasi termin pembayaran.</p>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+
 </div>
 
 </body>

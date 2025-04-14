@@ -91,8 +91,6 @@
                     <th>Pagu</th>
                     <th>Metode</th>
                     <th>Jumlah Termin</th>
-                    <th>Sumber Dana</th>
-                    <th>Jumlah Item</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -107,12 +105,19 @@
                     <td>Rp <?= number_format($kontrak['pembayaran']['pagu'] ?? 0, 0, ',', '.'); ?></td>
                     <td><?= $kontrak['pembayaran']['metode'] ?? '-'; ?></td>
                     <td><?= $kontrak['pembayaran']['jumlah_termin'] ?? '-'; ?></td>
-                    <td><?= $kontrak['pembayaran']['sumber_dana'] ?? '-'; ?></td>
-                    <td><?= count($kontrak['items']); ?></td>
                     <td><a href="<?= base_url('kontrak/e-katalog/daftar_kontrak_e_katalog/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
                     <a href="<?= base_url('kontrak/e-katalog/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
                           <i class="fa fa-download"></i> Unduh SP
-                      </a>
+                    </a>
+                    <a href="<?= base_url('kontrak/e-katalog/generateSPMK/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
+                          <i class="fa fa-download"></i> Unduh SPMK
+                    </a>
+                    <a href="<?= base_url('kontrak/e-katalog/generateSPP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
+                          <i class="fa fa-download"></i> Unduh SPP
+                    </a>
+                    <a href="<?= base_url('kontrak/e-katalog/generateBAST/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
+                          <i class="fa fa-download"></i> Unduh BAST
+                    </a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

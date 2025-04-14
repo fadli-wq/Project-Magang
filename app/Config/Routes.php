@@ -18,6 +18,9 @@ $routes->post('/kontrak/e-katalog_simpan_session', 'Kontrak::pembayaran');
 $routes->get('/kontrak/e-katalog/daftar_kontrak_e_katalog', 'Kontrak::daftar_kontrak_e_katalog');
 $routes->get('/kontrak/e-katalog/daftar_kontrak_e_katalog/(:num)', 'Kontrak::detail/$1');
 $routes->get('kontrak/e-katalog/generateSP/(:num)', 'Kontrak::generateSP/$1');
+$routes->get('kontrak/e-katalog/generateSPMK/(:num)', 'Kontrak::generateSPMK/$1');
+$routes->get('kontrak/e-katalog/generateSPP/(:num)', 'Kontrak::generateSPP/$1');
+$routes->get('kontrak/e-katalog/generateBAST/(:num)', 'Kontrak::generateBAST/$1');
 
 $routes->get('/kontrak/e-katalog/pembayaran', 'Kontrak::e_katalog_termin');
 $routes->post('/kontrak/e-katalog/pembayaran/termin_simpan_session', 'Kontrak::e_katalog_termin_submit');
@@ -36,7 +39,8 @@ $routes->post('/kontrak/tender/pembayaran/termin/item_submit', 'Tender::tender_i
 $routes->get('/kontrak/tender/success', 'Kontrak::success');
 $routes->get('/kontrak/tender/daftar_kontrak_tender', 'Tender::daftar_kontrak_tender');
 $routes->get('/kontrak/tender/daftar_kontrak_tender/(:num)', 'Tender::detail/$1');
-$routes->get('kontrak/tender/generateSP/(:num)', 'Tender::generateSP/$1');
+$routes->get('kontrak/tender/generatePerjanjian/(:num)', 'Tender::generatePerjanjian/$1');
+$routes->get('kontrak/tender/generateSPMK/(:num)', 'Tender::generateSPMK/$1');
 
 //termin
 $routes->get('/termin', 'Termin::index');
