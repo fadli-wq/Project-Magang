@@ -29,10 +29,22 @@ $routes->post('/kontrak/e-katalog/pembayaran/termin/item_submit', 'Kontrak::e_ka
 $routes->get('/kontrak/e-katalog/success', 'Kontrak::success');
 
 //input pl
-$routes->get('/kontrak/pl', 'KontrakPL::index');
+$routes->get('/kontrak/pl', 'Kontrak::pl');
+$routes->post('/kontrak/pl_simpan_session', 'Pl::pembayaran');
+$routes->get('/kontrak/pl/pembayaran', 'Pl::pl_termin');
+$routes->post('/kontrak/pl/pembayaran/termin_simpan_session', 'Pl::pl_termin_submit');
+$routes->get('/kontrak/pl/pembayaran/termin', 'Pl::pl_item');
+$routes->post('/kontrak/pl/pembayaran/termin/item_submit', 'Pl::pl_item_submit');
+$routes->get('/kontrak/pl/success', 'Kontrak::success');
+$routes->get('/kontrak/pl/daftar_kontrak_pl', 'Pl::daftar_kontrak_pl');
+$routes->get('/kontrak/pl/daftar_kontrak_pl/(:num)', 'Pl::detail/$1');
+$routes->get('kontrak/pl/generateSPK/(:num)', 'Pl::generateSPK/$1');
+$routes->get('kontrak/pl/generateSPMK/(:num)', 'Pl::generateSPMK/$1');
 
 //input tender
 $routes->get('/kontrak/tender', 'Kontrak::tender');
+$routes->post('/kontrak/tender_simpan_session', 'Tender::pembayaran');
+$routes->get('/kontrak/tender/pembayaran', 'Tender::tender_termin');
 $routes->post('/kontrak/tender/pembayaran/termin_simpan_session', 'Tender::tender_termin_submit');
 $routes->get('/kontrak/tender/pembayaran/termin', 'Tender::tender_item');
 $routes->post('/kontrak/tender/pembayaran/termin/item_submit', 'Tender::tender_item_submit');
