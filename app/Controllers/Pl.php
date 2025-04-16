@@ -137,7 +137,7 @@ class Pl extends BaseController
 
         $kontrakList = $PlModel->findAll();
 
-        $kontrakPerjanjian = [];
+        $kontrakSPK = [];
         $kontrakSPMK = [];
 
     foreach ($kontrakList as $kontrak) {
@@ -184,7 +184,7 @@ class Pl extends BaseController
         return view('kontrak/detail pl', $data);
     }
 
-    public function generatePerjanjian($id)
+    public function generateSPK($id)
     {
     $PlModel = new PlModel();
     $pembayaranModel = new PlPembayaranModel();

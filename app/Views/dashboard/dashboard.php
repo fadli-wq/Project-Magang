@@ -81,7 +81,7 @@
                 <div class="card-body text-center">
                     <i class="fa fa-shopping-cart fa-2x"></i>
                     <h5 class="card-title mt-2">PL</h5>
-                    <h3 class="fw-bold"></h3>
+                    <h3 class="fw-bold"><?= count($pl) ?></h3>
                 </div>
             </div>
         </div>
