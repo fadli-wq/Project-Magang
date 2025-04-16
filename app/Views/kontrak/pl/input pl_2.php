@@ -66,8 +66,8 @@
         <a href="<?= base_url('kontrak') ?>" ><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
         <ul class="list-unstyled ps-3">
             <li><a href="<?= base_url('kontrak/e-katalog') ?>">• E-Katalog</a></li>
-            <li><a href="<?= base_url('kontrak/pl') ?>">• PL</a></li>
-            <li><a href="<?= base_url('kontrak/tender') ?>" class="active">• Tender</a></li>
+            <li><a href="<?= base_url('kontrak/pl') ?>"class="active">• PL</a></li>
+            <li><a href="<?= base_url('kontrak/tender') ?>" >• Tender</a></li>
         </ul>
         <a href="<?= base_url('termin') ?>"><i class="fa fa-calendar"></i> Termin</a>
         <img src="<?= base_url('assets/images/logo_white.png') ?>" alt="Logo">

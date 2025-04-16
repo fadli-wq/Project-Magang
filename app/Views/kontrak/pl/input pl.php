@@ -103,13 +103,13 @@
                     <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan Nama" value="<?= session()->get('pl.nama') ?? '' ?>" required>
                 </div>                
                 <div class="row">
-    <!-- Nomor Surat Perjanjian -->
+    <!-- Nomor SPK -->
     <div class="col-md-6">
         <div class="mb-3">
-            <label for="nomor_perjanjian" class="form-label">SPK</label>
-            <input type="text" name="nomor_perjanjian" id="nomor_Perjanjian" class="form-control"
-                placeholder="Masukkan Nomor Surat Perjanjian"
-                value="<?= session()->get('pl.nomor_perjanjian') ?? '' ?>">
+            <label for="nomor_spk" class="form-label">SPK</label>
+            <input type="text" name="nomor_spk" id="nomor_spk" class="form-control"
+                placeholder="Masukkan Nomor Surat SPK"
+                value="<?= session()->get('pl.nomor_spk') ?? '' ?>">
         </div>
     </div>
 
@@ -125,11 +125,11 @@
 </div>
 
 <div class="row">
-    <!-- Tanggal Perjanjian -->
+    <!-- Tanggal SPK -->
     <div class="col-md-6">
         <div class="mb-3">
             <label for="tgl_spk" class="form-label">Tanggal SPK</label>
-            <input type="date" name="tgl_perjanjian" id="tgl_spk" class="form-control"
+            <input type="date" name="tgl_spk" id="tgl_spk" class="form-control"
                 value="<?= session()->get('pl.tgl_spk') ?? '' ?>">
         </div>
     </div>

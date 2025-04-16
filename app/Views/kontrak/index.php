@@ -109,7 +109,7 @@
                 <h4>Pengadaan Langsung (PL)</h4>
                 <p>Metode pengadaan barang/jasa yang dilakukan secara langsung kepada penyedia tanpa melalui proses tender atau lelang.</p>
                 <button class="btn btn-custom"><a href="<?= base_url('kontrak/pl')?>" style="color: inherit; text-decoration: none;">INPUT</a></button>
-                <button class="btn btn-primary"><a href="<?= base_url('kontrak/pl/lihat kontrak')?>" style="color: inherit; text-decoration: none;">Lihat Kontrak</a></button>
+                <button class="btn btn-primary"><a href="<?= base_url('kontrak/pl/daftar_kontrak_pl')?>" style="color: inherit; text-decoration: none;">Lihat Kontrak</a></button>
             </div>
             <div class="card-custom">
                 <h4>Tender</h4>
