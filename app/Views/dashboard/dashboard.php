@@ -99,7 +99,7 @@
                 <div class="card-body text-center">
                     <i class="fa fa-calendar-alt fa-2x"></i>
                     <h5 class="card-title mt-2">Termin</h5>
-                    <h3 class="fw-bold"></h3>
+                    <h3 class="fw-bold"><?= count($termin) ?></h3>
                 </div>
             </div>
         </div>

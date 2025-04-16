@@ -9,7 +9,7 @@ use App\Models\DirekturModel;
 use App\Models\E_katalogModel;
 use App\Models\TenderModel;
 use App\Models\PlModel;
-use APp\Models\TerminModel;
+use App\Models\TerminModel;
 
 class Dashboard extends BaseController
 {
@@ -25,6 +25,7 @@ class Dashboard extends BaseController
         $eKatalogModel = new E_katalogModel();
         $tenderModel = new TenderModel();
         $plModel = new PlModel();
+        $terminModel = new TerminModel();
 
 
         $vendors = $lainlainModel->select('penyedia')->distinct()->findAll();
@@ -33,6 +34,7 @@ class Dashboard extends BaseController
             'e_katalog' => $eKatalogModel->findAll(),
             'tender' => $tenderModel->findAll(),
             'pl' => $plModel->findAll(),
+            'termin' => $terminModel->findAll(),
             'vendors' => $vendors
         ];
         return view('dashboard/dashboard', $data);
