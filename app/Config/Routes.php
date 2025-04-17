@@ -60,3 +60,4 @@ $routes->get('/input_termin', 'Termin::daftar');
 $routes->get('/data_kontrak', 'Termin::data');
 $routes->post('/termin/simpan', 'Termin::save');
 $routes->delete('/termin/delete/(:num)', 'Termin::delete/$1');
+$routes->post('/termin/done/(:num)', 'Termin::done/$1');

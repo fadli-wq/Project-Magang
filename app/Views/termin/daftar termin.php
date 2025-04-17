@@ -76,11 +76,18 @@
                         <th>Tanggal</th>
                         <th>Nilai Termin</th>
                         <th>Jumlah Termin</th>
+                        <th>Status Termin</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no = 1; foreach ($termins as $termin): ?>
+                      <?php
+                          $jumlahTermin = $jumlahTerminPerKontrak[$termin['kontrak_id']] ?? 0;
+                          // Cek status dari kolom `status` di database
+                          $status = ($termin['status'] === 'selesai') ? 'Selesai' : 'Berjalan';
+                          $badgeClass = ($status === 'Selesai') ? 'success' : 'warning';
+                      ?>
                         <tr>
                           <td><?= $no++ ?></td>
                           <td><?= $kontrakList[$termin['kontrak_id']] ?? 'Tidak Diketahui' ?></td>
@@ -88,6 +95,7 @@
                           <td><?= $termin['tgl_termin'] ?></td>
                           <td>Rp <?= number_format($termin['nilai_termin'], 0, ',', '.') ?></td>
                           <td><?= $jumlahTerminPerKontrak[$termin['kontrak_id']] ?? '-' ?></td>
+                          <td><span class="badge bg-<?= $badgeClass ?>"><?= $status ?></span></td>
                           <td>
                                   <!-- Tombol Edit -->
                             <form action="<?= base_url('termin/edit/' . $termin['id']) ?>" method="post" style="display:inline;">
@@ -103,8 +111,8 @@
                                     <i class="fa fa-trash"></i> Hapus
                                 </button>
                             </form>
-                            <form action="<?= base_url('termin/done' . $termin['id']) ?>" method="post" style="display:inline;">
-                                <input type="hidden" name="_method" value="DELETE">
+                            <form action="<?= base_url('termin/done/' . $termin['id']) ?>" method="post" style="display:inline;">
+                                <input type="hidden" name="_method" value="SELESAI">
                                 <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Selesaikan Termin?');">
                                     <i class="fa fa-check"></i> Selesai
                                 </button>

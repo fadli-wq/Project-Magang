@@ -117,7 +117,7 @@ class Termin extends Controller
     return view('termin/daftar termin', [
         'termins' => $termins,
         'kontrakList' => $kontrakList,
-        'jumlahTerminPerKontrak' => $jumlahTerminPerKontrak
+        'jumlahTerminPerKontrak' => $jumlahTerminPerKontrak,
     ]);
     }
 
@@ -127,4 +127,11 @@ class Termin extends Controller
         $model->delete($id);
         return redirect()->to('input_termin');
     }
+    public function done($id)
+    {
+    $terminModel = new TerminModel();
+    $terminModel->update($id, ['status' => 'selesai']);
+    return redirect()->to(base_url('input_termin'))->with('success', 'Termin telah diselesaikan.');
+    }
+
 }
