@@ -86,7 +86,7 @@
     <div class="sidebar">
         <h3 class="text-center">Admin</h3>
         <a href="<?= base_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a>
-        <a href="<?= base_url('e-katalog')?>" class="active"><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
+        <a href="<?= base_url('kontrak')?>" class="active"><i class="fa fa-file-contract"></i> Kontrak <i class="fa fa-chevron-down float-end"></i></a>
         <ul class="list-unstyled ps-3">
             <li><a href="<?= base_url('kontrak/e-katalog')?>">• E-Katalog</a></li>
             <li><a href="<?= base_url('kontrak/pl')?>">• PL</a></li>

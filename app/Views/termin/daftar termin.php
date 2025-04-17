@@ -75,6 +75,7 @@
                         <th>Termin ke</th>
                         <th>Tanggal</th>
                         <th>Nilai Termin</th>
+                        <th>Jumlah Termin</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -82,10 +83,11 @@
                     <?php $no = 1; foreach ($termins as $termin): ?>
                         <tr>
                           <td><?= $no++ ?></td>
-                          <td><?= $kontrakList[$termin['kontrak_id']] ?? 'Tidak Dikenal' ?></td>
+                          <td><?= $kontrakList[$termin['kontrak_id']] ?? 'Tidak Diketahui' ?></td>
                           <td><?= $termin['termin_ke'] ?></td>
                           <td><?= $termin['tgl_termin'] ?></td>
                           <td>Rp <?= number_format($termin['nilai_termin'], 0, ',', '.') ?></td>
+                          <td><?= $jumlahTerminPerKontrak[$termin['kontrak_id']] ?? '-' ?></td>
                           <td>
                                   <!-- Tombol Edit -->
                             <form action="<?= base_url('termin/edit/' . $termin['id']) ?>" method="post" style="display:inline;">

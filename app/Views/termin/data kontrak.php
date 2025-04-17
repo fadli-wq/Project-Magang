@@ -60,20 +60,33 @@
 
               <div class="mb-3">
         <label class="form-label">Pilih Kontrak</label>
-        <select name="kontrak_id" class="form-control" required>
+        <select name="kontrak_id" id="kontrak_select" class="form-control" required>
             <option value="">-- Pilih Kontrak --</option>
             <optgroup label="E-Katalog">
-                <?php foreach ($kontrak_ekatalog as $k) : ?>
-                    <option value="<?= $k['id']; ?>">
-                        <?= $k['nomor_kontrak'] ?? 'Tanpa Nomor' ?> - <?= $k['nama']; ?>
-                    </option>
+                <?php foreach ($kontrak_ekatalog as $e): ?>
+                  <option 
+                    value="e<?= $e['id'] ?>"
+                    data-jumlah="<?= $e['jumlah_termin'] ?? '' ?>">
+                    [E-Katalog] <?= $e['nomor_kontrak'] ?? '-' ?> - <?= $e['nama'] ?>
+                  </option>
                 <?php endforeach; ?>
             </optgroup>
             <optgroup label="Tender">
-                <?php foreach ($kontrak_tender as $t) : ?>
-                    <option value="<?= $t['id']; ?>">
-                        <?= $t['nomor_kontrak'] ?? 'Tanpa Nomor' ?> - <?= $t['nama']; ?>
-                    </option>
+                <?php foreach ($kontrak_tender as $t): ?>
+                  <option
+                    value="t<?= $t['id'] ?>"
+                    data-jumlah="<?= $t['jumlah_termin'] ?? '' ?>">
+                    [Tender] <?= $t['nomor_kontrak'] ?? '-' ?> - <?= $t['nama'] ?>
+                  </option>
+                <?php endforeach; ?>
+            </optgroup>
+            <optgroup label="Pl">
+                <?php foreach ($kontrak_pl as $p): ?>
+                  <option 
+                    value="p<?= $p['id'] ?>"
+                    data-jumlah="<?= $p['jumlah_termin'] ?? '' ?>">
+                    [PL] <?= $p['nomor_kontrak'] ?? '-' ?> - <?= $p['nama'] ?>
+                  </option>
                 <?php endforeach; ?>
             </optgroup>
         </select>
@@ -87,12 +100,14 @@
                   <label class="form-label">Termin Ke</label>
                   <input type="number" name="termin_ke" class="form-control" required>
               </div>
-
+              <div class="mb-3">
+                  <label class="form-label">Jumlah Termin (dari kontrak)</label>
+                  <input type="number" id="jumlah_termin" class="form-control" readonly>
+              </div>
               <div class="mb-3">
                   <label class="form-label">Nilai Termin</label>
                   <input type="number" name="nilai_termin" class="form-control" required>
               </div>
-
               <button type="submit" class="btn btn-primary w-100">Simpan</button>
               <?php if (session()->getFlashdata('success')) : ?>
                   <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
@@ -103,5 +118,13 @@
 
           </form>
       </div>
+      <script>
+  document.getElementById('kontrak_select').addEventListener('change', function() {
+    const selectedOption = this.options[this.selectedIndex];
+    const jumlahTermin = selectedOption.getAttribute('data-jumlah');
+    document.getElementById('jumlah_termin').value = jumlahTermin || '';
+  });
+</script>
+
 </body>
 </html>
