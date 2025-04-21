@@ -34,7 +34,7 @@ class Dashboard extends BaseController
         $termin    = $terminModel->findAll();
 
         // Gabungkan semua kontrak
-        $kontrakGabungan = array_merge($e_katalog, $tender);
+        $kontrakGabungan = array_merge($e_katalog, $tender, $pl);
         $kontrakBerjalan = [];
         $kontrakSelesai  = [];
 
