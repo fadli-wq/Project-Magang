@@ -26,16 +26,27 @@ class Dashboard extends BaseController
         $tenderModel = new TenderModel();
         $plModel = new PlModel();
         $terminModel = new TerminModel();
+        $e_katalog = $eKatalogModel->findAll();
+        $tender    = $tenderModel->findAll();
+        $pl        = $plModel->findAll();
+        $termin    = $terminModel->findAll();
 
+        $totalEkatalog = array_sum(array_column($e_katalog, 'nilai_kontrak'));
+        $totalTender   = array_sum(array_column($tender, 'nilai_kontrak'));
+        $totalPl       = array_sum(array_column($pl, 'nilai_kontrak'));
 
         $vendors = $lainlainModel->select('penyedia')->distinct()->findAll();
-
         $data = [
             'e_katalog' => $eKatalogModel->findAll(),
             'tender' => $tenderModel->findAll(),
             'pl' => $plModel->findAll(),
             'termin' => $terminModel->findAll(),
-            'vendors' => $vendors
+            'vendors' => $vendors,
+            'nilai_kontrak' => [
+            'e_katalog' => $totalEkatalog,
+            'tender'    => $totalTender,
+            'pl'        => $totalPl,
+            ]
         ];
         return view('dashboard/dashboard', $data);
     }
