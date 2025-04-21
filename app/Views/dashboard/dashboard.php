@@ -120,18 +120,48 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title"><i class="fa fa-tasks"></i> Kontrak Status</h5>
-                    <button class="btn btn-outline-dark me-2">Kontrak Berjalan</button>
-                    <button class="btn btn-outline-dark">Kontrak Selesai</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Kontrak Berjalan -->
+<div class="card mt-4 shadow">
+  <div class="card-body">
+    <h5 class="card-title">
+      <i class="fa fa-spinner text-warning"></i> Kontrak Berjalan 
+      <span class="badge bg-warning text-dark"><?= count($kontrak_berjalan) ?> Kontrak</span>
+    </h5>
+    <?php if (count($kontrak_berjalan) > 0): ?>
+      <ul class="list-group">
+        <?php foreach ($kontrak_berjalan as $k): ?>
+          <li class="list-group-item">
+            <?= $k['nomor_kontrak'] ?? 'Tanpa Nomor'; ?> - <?= $k['nama']; ?>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    <?php else: ?>
+      <p class="text-muted">Tidak ada kontrak berjalan.</p>
+    <?php endif; ?>
+  </div>
+</div>
 
-    <!-- Rekap -->
+<!-- Kontrak Selesai -->
+<div class="card mt-4 shadow">
+  <div class="card-body">
+    <h5 class="card-title">
+      <i class="fa fa-check-circle text-success"></i> Kontrak Selesai 
+      <span class="badge bg-success"><?= count($kontrak_selesai) ?> Kontrak</span>
+    </h5>
+    <?php if (count($kontrak_selesai) > 0): ?>
+      <ul class="list-group">
+        <?php foreach ($kontrak_selesai as $k): ?>
+          <li class="list-group-item">
+            <?= $k['nomor_kontrak'] ?? 'Tanpa Nomor'; ?> - <?= $k['nama']; ?>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    <?php else: ?>
+      <p class="text-muted">Belum ada kontrak yang selesai.</p>
+    <?php endif; ?>
+  </div>
+</div>
+
     <!-- Rekap -->
 <div class="card shadow mt-4" style="background: white; border-radius: 10px;">
   <div class="card-body text-center">
