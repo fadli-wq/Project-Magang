@@ -78,10 +78,14 @@
     <h2 class="text-center">Daftar Kontrak Tender</h2>
 
     <!-- TABEL Perjanjian -->
+    <div class="mt-3 mb-3" >
     <div class="card-custom mt-4">
-        <h4>Kontrak Perjanjian & SMPK</h4>
-        <table class="table table-bordered">
-            <thead>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Kontrak Perjanjian & SMPK</h4>
+        <input type="text" id="searchInputKontrak" class="form-control w-25" placeholder="Cari Kontrak" onkeyup="searchTable('searchInputKontrak', 'tableKontrak')">
+    </div>
+    <table id="tableKontrak" class="table table-bordered">
+        <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nama</th>
@@ -127,6 +131,28 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
+<script>
+function searchTable(inputId, tableId) {
+    const input = document.getElementById(inputId).value.toLowerCase();
+    const table = document.getElementById(tableId);
+    const rows = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) { // start from 1 to skip header
+        const cells = rows[i].getElementsByTagName("td");
+        let found = false;
+
+        for (let j = 0; j < cells.length; j++) {
+            if (cells[j].innerText.toLowerCase().includes(input)) {
+                found = true;
+                break;
+            }
+        }
+
+        rows[i].style.display = found ? "" : "none";
+    }
+}
+</script>
     </div>
 </body>
 </html>
