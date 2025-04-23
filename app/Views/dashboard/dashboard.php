@@ -6,6 +6,7 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
     <style>
         h2{
           color: black;
@@ -119,29 +120,119 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title"><i class="fa fa-tasks"></i> Kontrak Status</h5>
-                    <button class="btn btn-outline-dark me-2">Kontrak Berjalan</button>
-                    <button class="btn btn-outline-dark">Kontrak Selesai</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Kontrak Berjalan -->
+<div class="card mt-4 shadow">
+  <div class="card-body">
+    <h5 class="card-title">
+      <i class="fa fa-spinner text-warning"></i> Kontrak Berjalan 
+      <span class="badge bg-warning text-dark"><?= count($kontrak_berjalan) ?> Kontrak</span>
+    </h5>
+    <?php if (count($kontrak_berjalan) > 0): ?>
+      <ul class="list-group">
+        <?php foreach ($kontrak_berjalan as $k): ?>
+          <li class="list-group-item">
+            <?= $k['nomor_kontrak'] ?? 'Tanpa Nomor'; ?> - <?= $k['nama']; ?>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    <?php else: ?>
+      <p class="text-muted">Tidak ada kontrak berjalan.</p>
+    <?php endif; ?>
+  </div>
+</div>
+
+<!-- Kontrak Selesai -->
+<div class="card mt-4 shadow">
+  <div class="card-body">
+    <h5 class="card-title">
+      <i class="fa fa-check-circle text-success"></i> Kontrak Selesai 
+      <span class="badge bg-success"><?= count($kontrak_selesai) ?> Kontrak</span>
+    </h5>
+    <?php if (count($kontrak_selesai) > 0): ?>
+      <ul class="list-group">
+        <?php foreach ($kontrak_selesai as $k): ?>
+          <li class="list-group-item">
+            <?= $k['nomor_kontrak'] ?? 'Tanpa Nomor'; ?> - <?= $k['nama']; ?>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    <?php else: ?>
+      <p class="text-muted">Belum ada kontrak yang selesai.</p>
+    <?php endif; ?>
+  </div>
+</div>
 
     <!-- Rekap -->
-    <div class="card shadow mt-4">
-        <div class="card-body text-center">
-            <h5 class="card-title"><i class="fa fa-chart-pie"></i> Rekap</h5>
-            <button class="btn btn-dark me-2">Tahunan</button>
-            <button class="btn btn-primary">2025</button>
-        </div>
+<div class="card shadow mt-4" style="background: white; border-radius: 10px;">
+  <div class="card-body text-center">
+    <h5 class="card-title mb-4"><i class="fa fa-chart-pie"></i> Rekap Nilai Kontrak</h5>
+    <div class="d-flex justify-content-center">
+      <div style="width: 400px;">
+        <canvas id="rekapChart"></canvas>
+      </div>
     </div>
+  </div>
+</div>
+
 </div>
 
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script>
+  const ctx = document.getElementById('rekapChart').getContext('2d');
+
+  const totalKontrak = <?= $nilai_kontrak['e_katalog'] + $nilai_kontrak['tender'] + $nilai_kontrak['pl']; ?>;
+
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['E-Katalog', 'Tender', 'PL'],
+      datasets: [{
+        label: 'Total Nilai Kontrak',
+        data: [
+          <?= $nilai_kontrak['e_katalog']; ?>,
+          <?= $nilai_kontrak['tender']; ?>,
+          <?= $nilai_kontrak['pl']; ?>
+        ],
+        backgroundColor: ['#0d6efd', '#ffc107', '#198754'],
+        borderColor: '#fff',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              let value = context.raw.toLocaleString('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+              });
+              return `${context.label}: ${value}`;
+            }
+          }
+        },
+        datalabels: {
+          color: '#fff',
+          formatter: (value, context) => {
+            let percentage = (value / totalKontrak * 100).toFixed(1);
+            return percentage + '%';
+          },
+          font: {
+            weight: 'bold'
+          }
+        }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+</script>
+
 
 </body>
 </html>
