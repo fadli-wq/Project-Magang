@@ -137,6 +137,7 @@ class Tender extends BaseController
 
         $kontrakList = $TenderModel->findAll();
 
+        $semuaKontrak = [];
         $kontrakPerjanjian = [];
         $kontrakSPMK = [];
 
@@ -144,14 +145,22 @@ class Tender extends BaseController
         $kontrak['pembayaran'] = $pembayaranModel->where('id_kontrak', $kontrak['id'])->first();
         $kontrak['items'] = $itemModel->where('id_kontrak', $kontrak['id'])->findAll();
 
-        if (!empty($kontrak['nomor_perjanjian'])) {
-            $kontrakPerjanjian[] = $kontrak;
-        } elseif (!empty($kontrak['nomor_spmk'])) {
-            $kontrakSPMK[] = $kontrak;
-        }
+        // if (!empty($kontrak['nomor_perjanjian'])) {
+        //     $kontrakPerjanjian[] = $kontrak;
+        // } elseif (!empty($kontrak['nomor_spmk'])) {
+        //     $kontrakSPMK[] = $kontrak;
+        // }
+        $semuaKontrak[] = $kontrak;
+            if (!empty($kontrak['nomor_perjanjian'])) {
+                $kontrakSP[] = $kontrak;
+            }
+            if (!empty($kontrak['nomor_spmk'])) {
+                $kontrakSPMK[] = $kontrak;
+            }
     }
 
     return view('kontrak/lihat kontrak tender', [
+        'semuaKontrak' => $semuaKontrak,
         'kontrakPerjanjian' => $kontrakPerjanjian,
         'kontrakSPMK' => $kontrakSPMK
     ]);

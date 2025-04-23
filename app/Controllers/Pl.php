@@ -137,6 +137,7 @@ class Pl extends BaseController
 
         $kontrakList = $PlModel->findAll();
 
+        $semuaKontrak = [];
         $kontrakSPK = [];
         $kontrakSPMK = [];
 
@@ -144,14 +145,23 @@ class Pl extends BaseController
         $kontrak['pembayaran'] = $pembayaranModel->where('id_kontrak', $kontrak['id'])->first();
         $kontrak['items'] = $itemModel->where('id_kontrak', $kontrak['id'])->findAll();
 
-        if (!empty($kontrak['nomor_spk'])) {
-            $kontrakSPK[] = $kontrak;
-        } elseif (!empty($kontrak['nomor_spmk'])) {
-            $kontrakSPMK[] = $kontrak;
-        }
+        // if (!empty($kontrak['nomor_spk'])) {
+        //     $kontrakSPK[] = $kontrak;
+        // } elseif (!empty($kontrak['nomor_spmk'])) {
+        //     $kontrakSPMK[] = $kontrak;
+        // }
+        $semuaKontrak[] = $kontrak;
+    
+            if (!empty($kontrak['nomor_sp'])) {
+                $kontrakSP[] = $kontrak;
+            }
+            if (!empty($kontrak['nomor_spmk'])) {
+                $kontrakSPMK[] = $kontrak;
+            }
     }
 
     return view('kontrak/lihat kontrak pl', [
+        'semuaKontrak' => $semuaKontrak,
         'kontrakSPK' => $kontrakSPK,
         'kontrakSPMK' => $kontrakSPMK
     ]);

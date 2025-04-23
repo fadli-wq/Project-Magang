@@ -25,32 +25,39 @@ class Kontrak extends BaseController
         $eKatalogModel = new E_katalogModel();
         $pembayaranModel = new E_katalogPembayaranModel();
         $itemModel = new LainlainModel();
-
+    
         $kontrakList = $eKatalogModel->findAll();
-
+    
+        $semuaKontrak = [];
         $kontrakSP = [];
         $kontrakSPMK = [];
         $kontrakSPP = [];
-
-    foreach ($kontrakList as $kontrak) {
-        $kontrak['pembayaran'] = $pembayaranModel->where('id_kontrak', $kontrak['id'])->first();
-        $kontrak['items'] = $itemModel->where('id_kontrak', $kontrak['id'])->findAll();
-
-        if (!empty($kontrak['nomor_sp'])) {
-            $kontrakSP[] = $kontrak;
-        } elseif (!empty($kontrak['nomor_spmk'])) {
-            $kontrakSPMK[] = $kontrak;
-        } elseif (!empty($kontrak['nomor_spp'])) {
-            $kontrakSPP[] = $kontrak;
+    
+        foreach ($kontrakList as $kontrak) {
+            $kontrak['pembayaran'] = $pembayaranModel->where('id_kontrak', $kontrak['id'])->first();
+            $kontrak['items'] = $itemModel->where('id_kontrak', $kontrak['id'])->findAll();
+    
+            $semuaKontrak[] = $kontrak;
+    
+            if (!empty($kontrak['nomor_sp'])) {
+                $kontrakSP[] = $kontrak;
+            }
+            if (!empty($kontrak['nomor_spmk'])) {
+                $kontrakSPMK[] = $kontrak;
+            }
+            if (!empty($kontrak['nomor_spp'])) {
+                $kontrakSPP[] = $kontrak;
+            }
         }
+    
+        return view('kontrak/lihat kontrak e-katalog', [
+            'semuaKontrak' => $semuaKontrak,
+            'kontrakSP' => $kontrakSP,
+            'kontrakSPMK' => $kontrakSPMK,
+            'kontrakSPP' => $kontrakSPP
+        ]);
     }
-
-    return view('kontrak/lihat kontrak e-katalog', [
-        'kontrakSP' => $kontrakSP,
-        'kontrakSPMK' => $kontrakSPMK,
-        'kontrakSPP' => $kontrakSPP
-    ]);
-    }
+    
 
     public function detail($id)
     {

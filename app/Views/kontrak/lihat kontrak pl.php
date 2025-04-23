@@ -102,7 +102,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($kontrakSPK as $kontrak) : ?>
+                <?php foreach ($semuaKontrak as $kontrak) : ?>
                 <tr>
                     <td><?= $kontrak['id']; ?></td>
                     <td><?= $kontrak['nama']; ?></td>
