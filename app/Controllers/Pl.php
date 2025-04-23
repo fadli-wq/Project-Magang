@@ -310,4 +310,11 @@ class Pl extends BaseController
     $f = new \NumberFormatter("id", \NumberFormatter::SPELLOUT);
     return ucfirst($f->format($number));
     }
+
+    public function delete($id)
+    {
+        $model = new PlModel();
+        $model->delete($id);
+        return redirect()->to('kontrak/pl/daftar_kontrak_pl');
+    }
 }

@@ -403,5 +403,11 @@ class Kontrak extends BaseController
     {
       return view('kontrak/tender/input tender');
     }
+    public function delete($id)
+    {
+        $model = new E_KatalogModel();
+        $model->delete($id);
+        return redirect()->to('kontrak/e-katalog/daftar_kontrak_e_katalog');
+    }
     
 }

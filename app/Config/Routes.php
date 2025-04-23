@@ -27,6 +27,7 @@ $routes->post('/kontrak/e-katalog/pembayaran/termin_simpan_session', 'Kontrak::e
 $routes->get('/kontrak/e-katalog/pembayaran/termin', 'Kontrak::e_katalog_item');
 $routes->post('/kontrak/e-katalog/pembayaran/termin/item_submit', 'Kontrak::e_katalog_item_submit');
 $routes->get('/kontrak/e-katalog/success', 'Kontrak::success');
+$routes->delete('/e-katalog/delete/(:num)', 'Kontrak::delete/$1');
 
 //input pl
 $routes->get('/kontrak/pl', 'Kontrak::pl');
@@ -36,6 +37,7 @@ $routes->post('/kontrak/pl/pembayaran/termin_simpan_session', 'Pl::pl_termin_sub
 $routes->get('/kontrak/pl/pembayaran/termin', 'Pl::pl_item');
 $routes->post('/kontrak/pl/pembayaran/termin/item_submit', 'Pl::pl_item_submit');
 $routes->get('/kontrak/pl/success', 'Pl::success');
+$routes->delete('/pl/delete/(:num)', 'Pl::delete/$1');
 $routes->get('/kontrak/pl/daftar_kontrak_pl', 'Pl::daftar_kontrak_pl');
 $routes->get('/kontrak/pl/daftar_kontrak_pl/(:num)', 'Pl::detail/$1');
 $routes->get('kontrak/pl/generateSPK/(:num)', 'Pl::generateSPK/$1');
@@ -49,6 +51,7 @@ $routes->post('/kontrak/tender/pembayaran/termin_simpan_session', 'Tender::tende
 $routes->get('/kontrak/tender/pembayaran/termin', 'Tender::tender_item');
 $routes->post('/kontrak/tender/pembayaran/termin/item_submit', 'Tender::tender_item_submit');
 $routes->get('/kontrak/tender/success', 'Tender::success');
+$routes->delete('/tender/delete/(:num)', 'Tender::delete/$1');
 $routes->get('/kontrak/tender/daftar_kontrak_tender', 'Tender::daftar_kontrak_tender');
 $routes->get('/kontrak/tender/daftar_kontrak_tender/(:num)', 'Tender::detail/$1');
 $routes->get('kontrak/tender/generatePerjanjian/(:num)', 'Tender::generatePerjanjian/$1');

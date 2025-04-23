@@ -79,7 +79,7 @@
 
     <!-- TABEL Perjanjian -->
     <div class="card-custom mt-4">
-        <h4>Kontrak Perjanjian</h4>
+        <h4>Kontrak Perjanjian & SMPK</h4>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -116,58 +116,17 @@
                     <a href="<?= base_url('kontrak/tender/generateSPMK/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
                           <i class="fa fa-download"></i> Unduh SPMK
                     </a>
+                    <form action="<?= base_url('tender/delete/' . $kontrak['id']) ?>" method="post" style="display:inline;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus Data Tender ini?');">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
+                            </form>
                     </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-
-    <!-- TABEL SPMK -->
-    <div class="card-custom mt-4">
-        <h4>Kontrak SPMK</h4>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Nomor SPMK</th>
-                    <th>Tanggal SPMK</th>
-                    <th>Nilai Kontrak</th>
-                    <th>Pagu</th>
-                    <th>Metode</th>
-                    <th>Jumlah Termin</th>
-                    <th>Sumber Dana</th>
-                    <th>Jumlah Item</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($kontrakSPMK as $kontrak) : ?>
-                <tr>
-                    <td><?= $kontrak['id']; ?></td>
-                    <td><?= $kontrak['nama']; ?></td>
-                    <td><?= $kontrak['nomor_spmk']; ?></td>
-                    <td><?= $kontrak['tgl_spmk']; ?></td>
-                    <td>Rp <?= number_format($kontrak['nilai_kontrak'], 0, ',', '.'); ?></td>
-                    <td>Rp <?= number_format($kontrak['pembayaran']['pagu'] ?? 0, 0, ',', '.'); ?></td>
-                    <td><?= $kontrak['pembayaran']['metode'] ?? '-'; ?></td>
-                    <td><?= $kontrak['pembayaran']['jumlah_termin'] ?? '-'; ?></td>
-                    <td><?= $kontrak['pembayaran']['sumber_dana'] ?? '-'; ?></td>
-                    <td><?= count($kontrak['items']); ?></td>
-                    <td><a href="<?= base_url('kontrak/tender/daftar_kontrak_tender/' . $kontrak['id']); ?>" class="btn btn-primary btn-sm">Detail</a>
-                    <a href="<?= base_url('kontrak/tender/generateSP/' . $kontrak['id']); ?>" class="btn btn-success btn-sm">
-                          <i class="fa fa-download"></i> Unduh SPMK
-                      </a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-  </div>
-
-</div>
-
 </body>
 </html>

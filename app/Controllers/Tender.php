@@ -310,4 +310,11 @@ class Tender extends BaseController
     $f = new \NumberFormatter("id", \NumberFormatter::SPELLOUT);
     return ucfirst($f->format($number));
     }
+
+    public function delete($id)
+    {
+        $model = new TenderModel();
+        $model->delete($id);
+        return redirect()->to('kontrak/tender/daftar_kontrak_tender');
+    }
 }
