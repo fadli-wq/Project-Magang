@@ -11,7 +11,7 @@
           color: black;
         }
         body {
-            background: linear-gradient(to right, #E6F4FF, #95B4E1, #60A0E9);
+          background-color: #9CADCE;
             color: white;
         }
         .sidebar {
